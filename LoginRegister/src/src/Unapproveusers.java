@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import static src.ApprovedUsers.jTable11;
 import static src.cashierregistrants.jTable2;
 import static src.category.jTable6;
@@ -32,7 +33,7 @@ public class Unapproveusers extends javax.swing.JFrame {
     public Unapproveusers() {
         initComponents();
         Connect();
-        toapproveuser();
+//        toapproveuser();
     }
     Connection con;
     PreparedStatement pst;
@@ -58,41 +59,64 @@ public class Unapproveusers extends javax.swing.JFrame {
        DefaultTableModel model10 = (DefaultTableModel)jTable10.getModel(); 
        model10.addRow(dataRow);
      }
+     
+      public static void AddRowToJapprovedTable(Object[] dataRow)   
+     {
+       DefaultTableModel model11 = (DefaultTableModel)jTable11.getModel(); 
+       model11.addRow(dataRow);
+     }
       public void toapproveuser()
   {
-      String username = jname.getText();
-      String password = jpassword.getText();
-//      String conpassword = jconfirmpassword.getText();
-      String email_id = jemailid.getText();
-      String gender = jgender.getText();
-      String age = jage.getText();
-     
-     
-     
-      String role1;
-      role1=jrole.getSelectedItem().toString();
       
-      String status;
-      status=jstatus.getSelectedItem().toString();
+      
+       String username = jname.getText();
+       String password = jpassword.getText();
+       String email_id = jemailid.getText();
+       String gender = jgender.getText();
+       String age = jage.getText();
+     
+       String role1;
+       role1=jrole.getSelectedItem().toString();
+      
+       String status;
+       status=jstatus.getSelectedItem().toString();
       
       try{
         
           String query ="insert into `users`(username,password,email_id,gender,age,role,status)values(?,?,?,?,?,?,?);";
           pst = con.prepareStatement(query);
-          pst.setString(1, username);
+          
+           pst.setString(1, username);
           pst.setString(2, password);
           pst.setString(3, email_id);
           pst.setString(4, gender);
-//          pst.setString(5, age);
-          pst.setInt(5, Integer.valueOf(jage.getText()));
+          pst.setString(5, age);
+//          pst.setInt(5, Integer.valueOf(jage.getText()));
+       
           pst.setString(6, role1);
+          
+      
           pst.setString(7, status);
           pst.executeUpdate();
+
+          
+          
+          
+          
+//          pst.setString(1, username);
+//          pst.setString(2, password);
+//          pst.setString(3, email_id);
+//          pst.setString(4, gender);
+//          pst.setString(5, age);
+////          pst.setInt(5, Integer.valueOf(jage.getText()));
+//          pst.setString(6, role1);
+//          pst.setString(7, status);
+//          pst.executeUpdate();
 
 //           int i=pst.executeUpdate();
            
             
-            JOptionPane.showMessageDialog(null,  username+"  has been successfully registered User as " +role1 + "Successful with User id as Email id   "+email_id);
+//            JOptionPane.showMessageDialog(null,  username+ "  has been successfully registered User as  " +role1 + "  Successful with User id as Email id   "+email_id);
                   
 //            else{
 //                      JOptionPane.showMessageDialog(null, username+"  You are NOT! successfully registered as Admin User!" + "Failed with User id as Email id"+email_id); 
@@ -103,26 +127,45 @@ public class Unapproveusers extends javax.swing.JFrame {
       }
   
   }
-      
+//      
  
-//       public void updateuserapplicant(){
-//        String sql ="select from `user_applicant`";
-//        try{
-//            pst=con.prepareStatement(sql);
-//            rs = pst.executeQuery();
-////            jTable3.setModel(DbUtils.resultSetToTableModel(rs));
-//        } catch (Exception e) {
-////           JOptionPane.showMessageDialog(null, e);
-//        }finally{
-//        try{
-//            rs.close();
-//            pst.close();
-//            
-//        }catch(Exception e){
-//            
-//        }
-//    }
-//       
+       public void updateuserapplicant(){
+        String sql ="select from `user_applicant`";
+        try{
+            pst=con.prepareStatement(sql);
+            rs = pst.executeQuery();
+//            jTable3.setModel(DbUtils.resultSetToTableModel(rs));
+        } catch (Exception e) {
+//           JOptionPane.showMessageDialog(null, e);
+        }finally{
+        try{
+            rs.close();
+            pst.close();
+            
+        }catch(Exception e){
+            
+        }
+    }
+       }
+        public void todeclineusers(){
+        String sql ="select from `user_applicant`";
+        try{
+            pst=con.prepareStatement(sql);
+            rs = pst.executeQuery();
+//            jTable3.setModel(DbUtils.resultSetToTableModel(rs));
+        } catch (Exception e) {
+//           JOptionPane.showMessageDialog(null, e);
+        }finally{
+        try{
+            rs.close();
+            pst.close();
+            
+        }catch(Exception e){
+            
+        }
+    }
+       }
+       
       
 
     /**
@@ -166,7 +209,7 @@ public class Unapproveusers extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Username", "Password", "Email id", "Gender", "Age", "Role", "Status"
+                "Id", "Username", "Password", "Email id", "Gender", "Age", "Role", "Status"
             }
         ));
         jTable10.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -184,6 +227,11 @@ public class Unapproveusers extends javax.swing.JFrame {
         });
 
         jremove.setText("Remove");
+        jremove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jremoveActionPerformed(evt);
+            }
+        });
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 204));
 
@@ -310,7 +358,7 @@ public class Unapproveusers extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
                     .addComponent(jstatus, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -334,9 +382,9 @@ public class Unapproveusers extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(88, 88, 88)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addGap(63, 63, 63)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(japprove, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jremove, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -368,39 +416,39 @@ public class Unapproveusers extends javax.swing.JFrame {
 
     private void jTable10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable10MouseClicked
         // TODO add your handling code here:
-        
-         DefaultTableModel model2 = (DefaultTableModel) jTable10.getModel();
          int Myindex = jTable10.getSelectedRow();
+         TableModel model2 = (TableModel) jTable10.getModel();
+        
          int Mycolumn = jTable10.getSelectedColumn();
   
          String value = model2.getValueAt(Myindex, Mycolumn).toString();
        
 //        int id = Integer.parseInt(model2.getValueAt(Myindex, 0).toString());
    
-        jname.setText(model2.getValueAt(Myindex, 0).toString());
-        jpassword.setText(model2.getValueAt(Myindex, 1).toString());
-        jemailid.setText(model2.getValueAt(Myindex, 2).toString());
-        jgender.setText(model2.getValueAt(Myindex, 3).toString());
-        jage.setText(model2.getValueAt(Myindex, 4).toString());
+        jname.setText(model2.getValueAt(Myindex, 1).toString());
+        jpassword.setText(model2.getValueAt(Myindex, 2).toString());
+        jemailid.setText(model2.getValueAt(Myindex, 3).toString());
+        jgender.setText(model2.getValueAt(Myindex, 4).toString());
+        jage.setText(model2.getValueAt(Myindex, 5).toString());
         
-        String rolea =model2.getValueAt(Myindex, 5).toString();
+        String rolea =model2.getValueAt(Myindex, 6).toString();
         
         switch(rolea){
-            case "cashier":
+            case "Cashier":
                 jrole.setSelectedIndex(0);
                 break;
-            case "role":
-                jrole.setSelectedIndex(0);
+            case "Staff":
+                jrole.setSelectedIndex(1);
                 break;        
         }
         
-        String statusa = model2.getValueAt(Myindex, 6).toString();
+        String statusa = model2.getValueAt(Myindex, 7).toString();
         switch(statusa){
             case "active":
                 jstatus.setSelectedIndex(0);
                 break;
             case "inactive":
-                jstatus.setSelectedIndex(0);
+                jstatus.setSelectedIndex(1);
                 break;        
         }
         
@@ -408,81 +456,127 @@ public class Unapproveusers extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable10MouseClicked
 
     private void japproveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_japproveActionPerformed
-        // TODO add your handling code here:
+        
+        DefaultTableModel tbmodel = (DefaultTableModel)jTable10.getModel();
+       if(jTable10.getSelectedRowCount() == 1){
           JOptionPane.showMessageDialog(null, "Approved!");
           toapproveuser();
-          try {
-            Statement st = con.createStatement();
-            String query1 = "select * from `users`";
-            ResultSet rs1 = st.executeQuery(query1);
-           
-            while(rs1.next()){
-                //data wil added until finished..
-                String id = rs1.getString("id");
-                String username1 = rs1.getString("username");
-                String password1 = rs1.getString("password");
-                String email_id1 = rs1.getString("email_id");
-                String gender1 = rs1.getString("gender");
-                String age1 = rs1.getString("age");
-                String role= rs1.getString("role");
-                String status= rs1.getString("status");
-                
-                
-                //string array for store data into jtable..
-                  String tbData[] = {id,username1,password1,email_id1,gender1,age1,role,status};
-                  DefaultTableModel tblModel = (DefaultTableModel)jTable11.getModel();
+          
+          //      to remove approved applicants/registrants..  
+        String role1;
+        role1 = jrole.getSelectedItem().toString();
 
-                //add string array data into jtable..
-                
-                tblModel.addRow(tbData);
+        int row = jTable10.getSelectedRow();
 
+        String cell = jTable10.getModel().getValueAt(row, 0).toString();
+
+        String sql = "DELETE FROM `user_applicant` where id= " + cell;
+
+        try {
+            pst = con.prepareStatement(sql);
+            pst.execute();
+            JOptionPane.showMessageDialog(null, " New " + role1 + " Added!");
+            updateuserapplicant();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        } finally {
+            try {
+                pst.close();
+                rs.close();
+
+            } catch (Exception e) {
             }
-            
-//            con.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(registeradmin.class.getName()).log(Level.SEVERE, null, ex);
-        }
-//         
-      //to remove approved applicants/registrants..  
-//         int row =jTable10.getSelectedRow();
-//        String cell = jTable10.getModel().getValueAt(row, 0).toString();
-//        String sql="DELETE FROM `user_applicant` where id= " + cell;
-//        
-//        try{
-//            pst = con.prepareStatement(sql);
-//            pst.execute();
-//            JOptionPane.showMessageDialog(null, "Successfully Deleted!");
-//            updateuserapplicant();
-//            
-//        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(null, e);
-//        }finally{
-//            try{
-//                pst.close();
-//                rs.close();
-//                
-//            }catch (Exception e){
-//        }
-//        
-//                
-//         DefaultTableModel model = (DefaultTableModel)jTable10.getModel();
-//         //delete row
-//         if(jTable10.getSelectedRowCount()==1){
-//             //if single row is selected then delete
-//              model.removeRow(jTable10.getSelectedRow());
-//              jname.setText("");
-//              jpassword.setText("");
-//              jemailid.setText("");
-//              jgender.setText("");
-//              jage.setText("");
-//              jrole.setSelectedIndex(0);
-//              jstatus.setSelectedIndex(0);
-//         }
-//        }
-//      
+     
+        
+                
+         DefaultTableModel model = (DefaultTableModel)jTable10.getModel();
+         //delete row
+         if(jTable10.getSelectedRowCount()==1){
+             //if single row is selected then delete
+              model.removeRow(jTable10.getSelectedRow());
+              jname.setText("");
+              jpassword.setText("");
+              jemailid.setText("");
+              jgender.setText("");
+              jage.setText("");
+              jrole.setSelectedIndex(0);
+              jstatus.setSelectedIndex(0);
+         }
+       }
+      
+           
+       }else{
+           if(jTable10.getSelectedRowCount() == 0){
+               //if table is empty np data the show message..
+                JOptionPane.showMessageDialog(null, "Table is empty!");
+           }else{
+                    JOptionPane.showMessageDialog(null, "Please select a single row to delete!");
+           }
+       }
+         
+
+
          
         
     }//GEN-LAST:event_japproveActionPerformed
+
+    private void jremoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jremoveActionPerformed
+        // TODO add your handling code here:
+        
+        DefaultTableModel tbmodel = (DefaultTableModel) jTable10.getModel();
+        if (jTable10.getSelectedRowCount() == 1) {
+            
+            String username = jname.getText();
+            String role1;
+            role1 = jrole.getSelectedItem().toString();
+            int row = jTable10.getSelectedRow();
+            String cell = jTable10.getModel().getValueAt(row, 0).toString();
+            String sql = "DELETE FROM `user_applicant` where id= " + cell;
+
+            try {
+                pst = con.prepareStatement(sql);
+                pst.execute();
+                JOptionPane.showMessageDialog(null, "You declined this user registration as  " + role1 + "   named    " + username + "!");
+                todeclineusers();
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            } finally {
+                try {
+                    pst.close();
+                    rs.close();
+
+                } catch (Exception e) {
+                }
+
+                DefaultTableModel model = (DefaultTableModel) jTable10.getModel();
+                //delete row
+                if (jTable10.getSelectedRowCount() == 1) {
+                    //if single row is selected then delete
+                    model.removeRow(jTable10.getSelectedRow());
+                    jname.setText("");
+                    jpassword.setText("");
+                    jemailid.setText("");
+                    jgender.setText("");
+                    jage.setText("");
+                }
+            }
+
+        } else {
+            if (jTable10.getSelectedRowCount() == 0) {
+                //if table is empty np data the show message..
+                JOptionPane.showMessageDialog(null, "Table is empty!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Please select a single row to delete!");
+            }
+        }
+
+        
+        
+       
+                
+    }//GEN-LAST:event_jremoveActionPerformed
 
     /**
      * @param args the command line arguments

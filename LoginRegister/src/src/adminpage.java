@@ -19,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 import static src.Unapproveusers.jTable10;
 import static src.adminregistrants.jTable1;
 import static src.cashierregistrants.jTable2;
+import static src.cashierusers.jTable12;
 import static src.category.jTable6;
 import static src.inventorypersonregistrants.jTable3;
 import static src.soldproducts.jTable5;
@@ -222,31 +223,33 @@ public class adminpage extends javax.swing.JFrame {
                         .addGap(98, 98, 98)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jinventory1)
-                            .addComponent(jLabel3)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(42, 42, 42)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGap(17, 17, 17)
+                                .addComponent(jLabel3))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jcash)
                                     .addComponent(jLabel6)))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(86, 86, 86)
+                        .addGap(77, 77, 77)
                         .addComponent(jLabel7)))
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
-                .addGap(34, 34, 34)
-                .addComponent(jinventory1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jcash)
-                .addGap(25, 25, 25)
-                .addComponent(jLabel6)
                 .addGap(18, 18, 18)
+                .addComponent(jinventory1)
+                .addGap(18, 18, 18)
+                .addComponent(jcash)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel6)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel7)
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 204));
@@ -325,18 +328,20 @@ public class adminpage extends javax.swing.JFrame {
                         .addGap(73, 73, 73))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(34, 34, 34)
                         .addComponent(jLabel4)
-                        .addGap(254, 254, 254))))
+                        .addGap(226, 226, 226))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel4)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -438,7 +443,7 @@ public class adminpage extends javax.swing.JFrame {
     private void jcashMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcashMouseClicked
         // TODO add your handling code here:
 
-        cashierregistrants cash = new cashierregistrants();
+        cashierusers cash = new cashierusers();
         cash.setVisible(true);
         cash.pack();
         cash.setLocationRelativeTo(null);
@@ -447,7 +452,7 @@ public class adminpage extends javax.swing.JFrame {
 
         try {
             Statement st = con.createStatement();
-            String query1 = "select * from `cashier_users` ";
+            String query1 = "select username, from `users`";
             ResultSet rs1 = st.executeQuery(query1);
 
             while(rs1.next()){
@@ -458,10 +463,11 @@ public class adminpage extends javax.swing.JFrame {
                 String email_id1 = rs1.getString("Email_id");
                 String gender1 = rs1.getString("Gender");
                 String age1 = rs1.getString("Age");
+                String status1= rs1.getString("status");
 
                 //string array for store data into jtable..
-                String tbData[] = {Id1,username1,password1,email_id1,gender1,age1};
-                DefaultTableModel tblModel = (DefaultTableModel)jTable2.getModel();
+                String tbData[] = {Id1,username1,password1,email_id1,gender1,age1,status1};
+                DefaultTableModel tblModel = (DefaultTableModel)jTable12.getModel();
 
                 //add string array data into jtable..
 
@@ -615,7 +621,7 @@ public class adminpage extends javax.swing.JFrame {
 
             while(rs1.next()){
                 //data wil added until finished..
-
+                String bid = rs1.getString("id");
                 String username1 = rs1.getString("username");
                 String password1 = rs1.getString("password");
                 String email_id1 = rs1.getString("email_id");
@@ -627,7 +633,7 @@ public class adminpage extends javax.swing.JFrame {
                 
 
                 //string array for store data into jtable..
-                String tbData[] = {username1,password1,email_id1,gender1,age1,rol,sts};
+                String tbData[] = {bid,username1,password1,email_id1,gender1,age1,rol,sts};
              
                 DefaultTableModel modelu = (DefaultTableModel)jTable10.getModel(); 
    

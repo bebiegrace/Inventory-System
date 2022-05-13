@@ -706,15 +706,13 @@ public class bookshop extends javax.swing.JFrame {
             
             for (int i = 0; i<numrow; i++){
                 double val = Double.valueOf(jTable2.getValueAt(i, 3).toString());
-                tot += val;
-                
-            }
-            
+                tot += val;       
+            }          
             jtcost.setText(Double.toString(tot));
             
             JOptionPane.showMessageDialog(this, "Succefully Deleted!!");
            
-         }else{
+            }else{
              if(jTable2.getRowCount()==0){
                  //if table is not empty(no data) than display message
                  JOptionPane.showMessageDialog(this, "Table is empty.");

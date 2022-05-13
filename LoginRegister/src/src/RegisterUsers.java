@@ -416,6 +416,8 @@ public class RegisterUsers extends javax.swing.JFrame {
         jage.setText("");
         jrole.setSelectedIndex(0);
         jstatus.setSelectedIndex(0);
+        
+       
     }//GEN-LAST:event_jsaveActionPerformed
 
     private void jresetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jresetActionPerformed

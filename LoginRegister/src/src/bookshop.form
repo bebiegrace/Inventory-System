@@ -286,7 +286,7 @@
                                   <Component id="quantity" min="-2" pref="29" max="-2" attributes="0"/>
                                   <Component id="jLabel5" min="-2" pref="28" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="32767" attributes="0"/>
@@ -295,9 +295,9 @@
                                   <Component id="jButton2" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                                   <Component id="jadd" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

@@ -151,7 +151,7 @@ public class mainform extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
-         loginform logf = new  loginform();
+         LoginUsers logf = new  LoginUsers();
          logf.setVisible(true);
          logf.pack();
          logf.setLocationRelativeTo(null);
@@ -162,11 +162,11 @@ public class mainform extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         
-         registeradmin regadmin = new  registeradmin();
-         regadmin.setVisible(true);
-         regadmin.pack();
-         regadmin.setLocationRelativeTo(null);
-         regadmin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+         RegisterUsers regusers = new   RegisterUsers();
+         regusers.setVisible(true);
+         regusers.pack();
+         regusers.setLocationRelativeTo(null);
+         regusers.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
          this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 

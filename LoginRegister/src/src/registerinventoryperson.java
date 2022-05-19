@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import static src.cashierregistrants.jTable2;
+//import static src.cashierregistrants.jTable2;
 import static src.inventorypersonregistrants.jTable3;
 
 /**
@@ -273,12 +273,12 @@ public class registerinventoryperson extends javax.swing.JFrame {
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
         // TODO add your handling code here:
         
-         loginform logf = new  loginform();
-         logf.setVisible(true);
-         logf.pack();
-         logf.setLocationRelativeTo(null);
-         logf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-         this.dispose();
+//         loginform logf = new  loginform();
+//         logf.setVisible(true);
+//         logf.pack();
+//         logf.setLocationRelativeTo(null);
+//         logf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//         this.dispose();
     }//GEN-LAST:event_jLabel8MouseClicked
 
     private void jsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jsaveActionPerformed
@@ -369,7 +369,7 @@ public class registerinventoryperson extends javax.swing.JFrame {
             
             con.close();
         } catch (SQLException ex) {
-            Logger.getLogger(registeradmin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(adduser.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jsaveActionPerformed
 

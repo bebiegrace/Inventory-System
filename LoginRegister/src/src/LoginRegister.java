@@ -10,7 +10,7 @@ public class LoginRegister {
 
    
     public static void main(String[] args) {
-       mainform  main= new mainform();
+       LoginUsers  main= new LoginUsers();
         
         main.setVisible(true);
         

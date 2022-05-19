@@ -258,12 +258,12 @@ public class loginadmin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbackMouseClicked
-         loginform logf = new  loginform();
-         logf.setVisible(true);
-         logf.pack();
-         logf.setLocationRelativeTo(null);
-         logf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-         this.dispose();
+//         loginform logf = new  loginform();
+//         logf.setVisible(true);
+//         logf.pack();
+//         logf.setLocationRelativeTo(null);
+//         logf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//         this.dispose();
     }//GEN-LAST:event_jbackMouseClicked
 
     private void jLabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelaMouseClicked

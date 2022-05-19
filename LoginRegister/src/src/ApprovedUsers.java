@@ -19,7 +19,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import static src.adminregistrants.jTable1;
-import static src.cashierregistrants.jTable2;
+//import static src.adduser.jTable2;
 
 /**
  *
@@ -39,11 +39,11 @@ public class ApprovedUsers extends javax.swing.JFrame {
        DefaultTableModel model1 = (DefaultTableModel)jTable1.getModel(); 
        model1.addRow(dataRow);
      }
-     public static void AddRowToJcashierTable(Object[] dataRow)   
-     {
-       DefaultTableModel model1 = (DefaultTableModel)jTable2.getModel(); 
-       model1.addRow(dataRow);
-     }
+//     public static void AddRowToJcashierTable(Object[] dataRow)   
+//     {
+//       DefaultTableModel model1 = (DefaultTableModel)jTable2.getModel(); 
+//       model1.addRow(dataRow);
+//     }
      
     Connection con;
     PreparedStatement pst;
@@ -125,8 +125,8 @@ public class ApprovedUsers extends javax.swing.JFrame {
            int c;
            
            c = rsd.getColumnCount();
-           DefaultTableModel de = (DefaultTableModel)jTable2.getModel();
-           de.setRowCount(0);
+//           DefaultTableModel de = (DefaultTableModel)jTable2.getModel();
+//           de.setRowCount(0);
            
            while(rs.next())
            {
@@ -141,7 +141,7 @@ public class ApprovedUsers extends javax.swing.JFrame {
                    v2.add(rs.getString("Age"));
                    
                }
-               de.addRow(v2);
+//               de.addRow(v2);
            }
        } catch (SQLException ex) {
             Logger.getLogger(inventorypage.class.getName()).log(Level.SEVERE, null, ex);
@@ -562,12 +562,12 @@ public class ApprovedUsers extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jlogin1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jlogin1ActionPerformed
-        registeradmin regadmin = new  registeradmin();
-        regadmin.setVisible(true);
-        regadmin.pack();
-        regadmin.setLocationRelativeTo(null);
-        regadmin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.dispose();
+//        registeradmin regadmin = new  registeradmin();
+//        regadmin.setVisible(true);
+//        regadmin.pack();
+//        regadmin.setLocationRelativeTo(null);
+//        regadmin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//        this.dispose();
     }//GEN-LAST:event_jlogin1ActionPerformed
 
     private void jloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jloginActionPerformed
@@ -638,7 +638,7 @@ public class ApprovedUsers extends javax.swing.JFrame {
         else
         {
             JOptionPane.showMessageDialog(null, "User Successfully Added!");
-            cashierregistrants cashregis = new  cashierregistrants();
+            adduser cashregis = new  adduser();
             cashregis.setVisible(true);
             cashregis.pack();
             cashregis.setLocationRelativeTo(null);
@@ -674,7 +674,7 @@ public class ApprovedUsers extends javax.swing.JFrame {
 
             //            con.close();
         } catch (SQLException ex) {
-            Logger.getLogger(registeradmin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(adduser.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_jaddActionPerformed

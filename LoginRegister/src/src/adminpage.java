@@ -5,12 +5,18 @@
  */
 package src;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.Timer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -18,10 +24,13 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import static src.Unapproveusers.jTable10;
 import static src.adminregistrants.jTable1;
-import static src.cashierregistrants.jTable2;
+import static src.allusers.jTable13;
+
+
 import static src.cashierusers.jTable12;
 import static src.category.jTable6;
 import static src.inventorypersonregistrants.jTable3;
+import static src.soldadmin.jTable9;
 import static src.soldproducts.jTable5;
 
 
@@ -37,6 +46,8 @@ public class adminpage extends javax.swing.JFrame {
     public adminpage() {
         initComponents();
           Connect();
+          dt();
+          time();
     }
     
      Connection con;
@@ -62,6 +73,39 @@ public class adminpage extends javax.swing.JFrame {
        DefaultTableModel modelu = (DefaultTableModel)jTable10.getModel(); 
        modelu.addRow(dataRow);
      }
+     
+     
+     
+     public void dt(){
+         
+         Date d = new Date();
+         
+         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+         
+         String dd = sdf.format(d);
+         date.setText(dd);
+     }
+         Timer t;
+         SimpleDateFormat st;
+          public void time(){
+              t = new Timer(0, new ActionListener(){
+                  @Override
+                  public void actionPerformed(ActionEvent e){
+                      Date dt = new Date();
+                      st = new SimpleDateFormat("hh-mm-ss a");
+                      String tt =st.format(dt);
+                      time.setText(tt);
+                      
+                  }
+              });
+                  t.start();    
+          }
+     
+//      public static void AddRowToallusersable(Object[] dataRow)   
+//     {
+//       DefaultTableModel modelu = (DefaultTableModel)jTable14.getModel(); 
+//       modelu.addRow(dataRow);
+//     }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -72,110 +116,49 @@ public class adminpage extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        activeuser = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jlogin = new javax.swing.JButton();
-        jlogin1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        jallusers = new javax.swing.JLabel();
         jinventory1 = new javax.swing.JLabel();
         jcash = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jsold = new javax.swing.JLabel();
         jcategory = new javax.swing.JLabel();
+        jsold1 = new javax.swing.JLabel();
+        jsold2 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        activeuser = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        date = new javax.swing.JTextField();
+        time = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 204, 153));
-
-        jPanel2.setBackground(new java.awt.Color(255, 153, 102));
-
-        activeuser.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        activeuser.setText("Admin user");
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setText("X");
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
-            }
-        });
-
-        jButton1.setBackground(new java.awt.Color(255, 255, 204));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setText("Home");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jlogin.setBackground(new java.awt.Color(255, 255, 204));
-        jlogin.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jlogin.setText("Sign-In");
-        jlogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jloginActionPerformed(evt);
-            }
-        });
-
-        jlogin1.setBackground(new java.awt.Color(255, 255, 204));
-        jlogin1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jlogin1.setText("Sign-up");
-        jlogin1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jlogin1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(jlogin1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
-                .addComponent(jlogin, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(activeuser, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46)
-                .addComponent(jLabel2)
-                .addGap(24, 24, 24))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 5, Short.MAX_VALUE)
-                        .addComponent(activeuser, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(17, 17, 17))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jlogin1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jlogin, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel2))
-                        .addGap(0, 0, Short.MAX_VALUE))))
-        );
+        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 204));
 
-        jLabel3.setBackground(new java.awt.Color(255, 255, 204));
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel3.setText("System Users");
+        jallusers.setBackground(new java.awt.Color(255, 255, 204));
+        jallusers.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jallusers.setForeground(new java.awt.Color(255, 0, 51));
+        jallusers.setText("All Users");
+        jallusers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jallusersMouseClicked(evt);
+            }
+        });
 
         jinventory1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jinventory1.setForeground(new java.awt.Color(255, 51, 51));
@@ -195,21 +178,16 @@ public class adminpage extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setBackground(new java.awt.Color(255, 255, 204));
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel4.setText("Manages the System");
+
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 51, 51));
         jLabel6.setText("Admin");
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel6MouseClicked(evt);
-            }
-        });
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel7.setText("Followup for Approval");
-        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel7MouseClicked(evt);
             }
         });
 
@@ -220,36 +198,40 @@ public class adminpage extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(98, 98, 98)
+                        .addGap(20, 20, 20)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jinventory1)
+                            .addComponent(jLabel4)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addComponent(jLabel3))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jcash)
-                                    .addComponent(jLabel6)))))
+                                .addGap(47, 47, 47)
+                                .addComponent(jinventory1))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(77, 77, 77)
-                        .addComponent(jLabel7)))
-                .addContainerGap(99, Short.MAX_VALUE))
+                        .addGap(108, 108, 108)
+                        .addComponent(jLabel6)))
+                .addContainerGap(22, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(107, 107, 107)
+                        .addComponent(jcash))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(98, 98, 98)
+                        .addComponent(jallusers)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addComponent(jinventory1)
-                .addGap(18, 18, 18)
-                .addComponent(jcash)
-                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addGap(31, 31, 31)
+                .addComponent(jallusers)
+                .addGap(35, 35, 35)
                 .addComponent(jLabel6)
-                .addGap(30, 30, 30)
-                .addComponent(jLabel7)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addGap(38, 38, 38)
+                .addComponent(jinventory1)
+                .addGap(40, 40, 40)
+                .addComponent(jcash)
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 204));
@@ -260,7 +242,7 @@ public class adminpage extends javax.swing.JFrame {
 
         jsold.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jsold.setForeground(new java.awt.Color(255, 51, 51));
-        jsold.setText("Sold Poducts");
+        jsold.setText("Sold Product");
         jsold.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jsoldMouseClicked(evt);
@@ -276,128 +258,284 @@ public class adminpage extends javax.swing.JFrame {
             }
         });
 
+        jsold1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jsold1.setForeground(new java.awt.Color(255, 51, 51));
+        jsold1.setText("cTransaction");
+        jsold1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jsold1MouseClicked(evt);
+            }
+        });
+
+        jsold2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jsold2.setForeground(new java.awt.Color(255, 51, 51));
+        jsold2.setText("Transaction");
+        jsold2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jsold2MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(59, 59, 59)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jcategory)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(78, 78, 78)
-                        .addComponent(jcategory))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
+                        .addGap(23, 23, 23)
                         .addComponent(jLabel5)))
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jsold)
-                .addGap(99, 99, 99))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jsold)
+                    .addComponent(jsold2)
+                    .addComponent(jsold1))
+                .addGap(70, 70, 70))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(21, 21, 21)
                 .addComponent(jLabel5)
-                .addGap(48, 48, 48)
+                .addGap(43, 43, 43)
                 .addComponent(jcategory)
-                .addGap(49, 49, 49)
+                .addGap(18, 18, 18)
+                .addComponent(jsold1)
+                .addGap(28, 28, 28)
+                .addComponent(jsold2)
+                .addGap(32, 32, 32)
                 .addComponent(jsold)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 102, 0));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Admin System Management");
+        jLabel10.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/flowrs ddd.png"))); // NOI18N
+        jLabel10.setOpaque(true);
 
-        jLabel4.setText("jLabel4");
+        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
+
+        activeuser.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        activeuser.setText("Admin user");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setText("X");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel8.setText("Sign-out");
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel8MouseClicked(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 204, 204));
+        jLabel7.setText("Approve  New Users");
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 204, 204));
+        jLabel9.setText("Add User Admin");
+        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel9MouseClicked(evt);
+            }
+        });
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 204, 204));
+        jLabel11.setText("Sign-out");
+        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel11MouseClicked(evt);
+            }
+        });
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/flowercon.png"))); // NOI18N
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(151, 151, 151)
+                .addComponent(jLabel7)
+                .addGap(91, 91, 91)
+                .addComponent(jLabel9)
+                .addGap(76, 76, 76)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10861, Short.MAX_VALUE)
+                .addComponent(jLabel8)
+                .addGap(102, 102, 102)
+                .addComponent(activeuser, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(jLabel2)
+                .addGap(24, 24, 24))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(activeuser, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(28, 28, 28))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel11))
+                        .addGap(37, 37, 37))))
+        );
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 102));
+        jLabel3.setText("Admin Management");
+
+        jPanel5.setBackground(new java.awt.Color(153, 153, 153));
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel12.setText("Date:");
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel13.setText("Time:");
+
+        date.setBackground(new java.awt.Color(51, 51, 51));
+        date.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        date.setForeground(new java.awt.Color(255, 51, 51));
+        date.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        date.setText("0");
+
+        time.setBackground(new java.awt.Color(51, 51, 51));
+        time.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        time.setForeground(new java.awt.Color(255, 51, 51));
+        time.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        time.setText("0");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel12))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(time)
+                    .addComponent(date, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(time, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel10)
+                        .addGap(36, 36, 36)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(66, 66, 66)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(73, 73, 73))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
-                        .addComponent(jLabel4)
-                        .addGap(226, 226, 226))))
+                        .addGap(53, 53, 53)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(377, 377, 377)
+                        .addComponent(jLabel3)
+                        .addGap(126, 126, 126)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(jLabel4)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(23, 23, 23))
+                        .addGap(37, 37, 37)
+                        .addComponent(jLabel10))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(72, 72, 72)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(211, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(1104, 745));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        mainform main = new mainform();
-        main.setVisible(true);
-        main.pack();
-        main.setLocationRelativeTo(null);
-        main.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         // TODO add your handling code here:
         
               System.exit(0);
     }//GEN-LAST:event_jLabel2MouseClicked
-
-    private void jloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jloginActionPerformed
-        // TODO add your handling code here:
-
-        loginadmin logad = new loginadmin();
-        logad.setVisible(true);
-        logad.pack();
-        logad.setLocationRelativeTo(null);
-        logad.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.dispose();
-    }//GEN-LAST:event_jloginActionPerformed
-
-    private void jlogin1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jlogin1ActionPerformed
-         registeradmin regadmin = new  registeradmin();
-         regadmin.setVisible(true);
-         regadmin.pack();
-         regadmin.setLocationRelativeTo(null);
-         regadmin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-         this.dispose();
-    }//GEN-LAST:event_jlogin1ActionPerformed
 
     private void jinventory1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jinventory1MouseClicked
         // TODO add your handling code here:
@@ -409,33 +547,35 @@ public class adminpage extends javax.swing.JFrame {
         inventory.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.dispose();
 
-        try {
+         try {
             Statement st = con.createStatement();
-            String query1 = "select * from `inventoryperson_users` ";
+            String query1 = "select id, username, password, email_id, gender, age, status from `users` where role='Staff'";
             ResultSet rs1 = st.executeQuery(query1);
-
+            
             while(rs1.next()){
                 //data wil added until finished..
-                String Id1 = rs1.getString("Id");
-                String username1 = rs1.getString("Username");
-                String password1 = rs1.getString("Password");
-                String email_id1 = rs1.getString("Email_id");
-                String gender1 = rs1.getString("Gender");
-                String age1 = rs1.getString("Age");
-
+                String bid = rs1.getString("id");
+                String username1 = rs1.getString("username");
+                String password1 = rs1.getString("password");
+                String email_id1 = rs1.getString("email_id");
+                String gender1 = rs1.getString("gender");
+                String age1 = rs1.getString("age");
+                String stat = rs1.getString("status");
+              
+                
                 //string array for store data into jtable..
-                String tbData[] = {Id1,username1,password1,email_id1,gender1,age1};
-                DefaultTableModel tblModel = (DefaultTableModel)jTable3.getModel();
+                String tbData[] = {bid,username1,password1,email_id1,gender1,age1,stat};
+                  DefaultTableModel tblModel = (DefaultTableModel)jTable3.getModel();
 
                 //add string array data into jtable..
-
+                
                 tblModel.addRow(tbData);
 
             }
-
+            
             con.close();
         } catch (SQLException ex) {
-            Logger.getLogger(registeradmin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(adduser.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_jinventory1MouseClicked
@@ -450,36 +590,37 @@ public class adminpage extends javax.swing.JFrame {
         cash.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.dispose();
 
-        try {
+       try {
             Statement st = con.createStatement();
-            String query1 = "select username, from `users`";
+            String query1 = "select id, username, password, email_id, gender, age, status from `users` where role='Cashier'";
             ResultSet rs1 = st.executeQuery(query1);
-
+            
             while(rs1.next()){
                 //data wil added until finished..
-                String Id1 = rs1.getString("Id");
-                String username1 = rs1.getString("Username");
-                String password1 = rs1.getString("Password");
-                String email_id1 = rs1.getString("Email_id");
-                String gender1 = rs1.getString("Gender");
-                String age1 = rs1.getString("Age");
-                String status1= rs1.getString("status");
-
+                String bid = rs1.getString("id");
+                String username1 = rs1.getString("username");
+                String password1 = rs1.getString("password");
+                String email_id1 = rs1.getString("email_id");
+                String gender1 = rs1.getString("gender");
+                String age1 = rs1.getString("age");
+                String stat = rs1.getString("status");
+              
+                
                 //string array for store data into jtable..
-                String tbData[] = {Id1,username1,password1,email_id1,gender1,age1,status1};
-                DefaultTableModel tblModel = (DefaultTableModel)jTable12.getModel();
+                String tbData[] = {bid,username1,password1,email_id1,gender1,age1,stat};
+                  DefaultTableModel tblModel = (DefaultTableModel)jTable12.getModel();
 
                 //add string array data into jtable..
-
+                
                 tblModel.addRow(tbData);
 
             }
-
+            
             con.close();
         } catch (SQLException ex) {
-            Logger.getLogger(registeradmin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(adduser.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+         
     }//GEN-LAST:event_jcashMouseClicked
 
     private void jsoldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jsoldMouseClicked
@@ -494,31 +635,31 @@ public class adminpage extends javax.swing.JFrame {
 
         try {
             Statement st = con.createStatement();
-            String query1 = "select * from `sales_products` ";
+            String query1 = "select * from `sales_products`";
             ResultSet rs1 = st.executeQuery(query1);
 
             while(rs1.next()){
                 //data wil added until finished..
-                String bid = rs1.getString("Id");
-                String salesid = rs1.getString("sales_id");
-                String bookn = rs1.getString("bookname");
-                String price = rs1.getString("price");
-                String qty = rs1.getString("quantity");
-                String totl = rs1.getString("total");
+                String bid2 = rs1.getString("id");
+                String salesid2 = rs1.getString("sales_id");
+                String bookn2 = rs1.getString("bookname");
+                String price2 = rs1.getString("price");
+                String qty2 = rs1.getString("quantity");
+                String totl2 = rs1.getString("total");
 
                 //string array for store data into jtable..
-                String tbData[] = {bid,salesid,bookn,price,qty,totl};
-                DefaultTableModel tblModel = (DefaultTableModel)jTable5.getModel();
+                String tbData[] = {bid2,salesid2,bookn2,price2,qty2,totl2};
+                DefaultTableModel tabledata = (DefaultTableModel)jTable9.getModel();
 
                 //add string array data into jtable..
 
-                tblModel.addRow(tbData);
+                tabledata.addRow(tbData);
 
             }
 
             con.close();
         } catch (SQLException ex) {
-            Logger.getLogger(registeradmin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(adduser.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_jsoldMouseClicked
@@ -558,7 +699,7 @@ public class adminpage extends javax.swing.JFrame {
 
             con.close();
         } catch (SQLException ex) {
-            Logger.getLogger(registeradmin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(adduser.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jcategoryMouseClicked
 
@@ -574,20 +715,22 @@ public class adminpage extends javax.swing.JFrame {
         
          try {
             Statement st = con.createStatement();
-            String query1 = "select * from `admin_users` ";
+            String query1 = "select id, username, password, email_id, gender,age,status from `users` where role='Admin'";
             ResultSet rs1 = st.executeQuery(query1);
             
             while(rs1.next()){
                 //data wil added until finished..
-                
-                String username1 = rs1.getString("Username");
-                String password1 = rs1.getString("Password");
-                String email_id1 = rs1.getString("Email_id");
-                String gender1 = rs1.getString("Gender");
-                String age1 = rs1.getString("Age");
+                String bid = rs1.getString("id");
+                String username1 = rs1.getString("username");
+                String password1 = rs1.getString("password");
+                String email_id1 = rs1.getString("email_id");
+                String gender1 = rs1.getString("gender");
+                String age1 = rs1.getString("age");
+                String stat = rs1.getString("status");
+              
                 
                 //string array for store data into jtable..
-                String tbData[] = {username1,password1,email_id1,gender1,age1};
+                String tbData[] = {bid,username1,password1,email_id1,gender1,age1,stat};
                   DefaultTableModel tblModel = (DefaultTableModel)jTable1.getModel();
 
                 //add string array data into jtable..
@@ -598,7 +741,7 @@ public class adminpage extends javax.swing.JFrame {
             
             con.close();
         } catch (SQLException ex) {
-            Logger.getLogger(registeradmin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(adduser.class.getName()).log(Level.SEVERE, null, ex);
         }
          
     }//GEN-LAST:event_jLabel6MouseClicked
@@ -646,12 +789,113 @@ public class adminpage extends javax.swing.JFrame {
 
             con.close();
         } catch (SQLException ex) {
-            Logger.getLogger(registeradmin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(adduser.class.getName()).log(Level.SEVERE, null, ex);
         }
     
                            
          
     }//GEN-LAST:event_jLabel7MouseClicked
+
+    private void jallusersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jallusersMouseClicked
+        // TODO add your handling code here:
+        
+        allusers users = new allusers();
+       users .setVisible(true);
+        users .pack();
+        users .setLocationRelativeTo(null);
+        users .setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.dispose();
+
+        try {
+            Statement st = con.createStatement();
+            String query1 = "select * from `users`";
+            ResultSet rs1 = st.executeQuery(query1);
+
+            while(rs1.next()){
+                //data wil added until finished..
+                String Id1 = rs1.getString("id");
+                String username1 = rs1.getString("username");
+                String password1 = rs1.getString("password");
+                String email_id1 = rs1.getString("email_id");
+                String gender1 = rs1.getString("gender");
+                String age1 = rs1.getString("age");
+                String rolr = rs1.getString("role");
+
+                String status1= rs1.getString("status");
+
+                //string array for store data into jtable..
+                String tbData[] = {Id1,username1,password1,email_id1,gender1,age1,rolr,status1};
+                DefaultTableModel tblModel = (DefaultTableModel)jTable13.getModel();
+
+                //add string array data into jtable..
+
+                tblModel.addRow(tbData);
+
+            }
+
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(adduser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+                                     
+
+        
+        
+    }//GEN-LAST:event_jallusersMouseClicked
+
+    private void jsold1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jsold1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jsold1MouseClicked
+
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+        // TODO add your handling code here:
+        LoginUsers main = new  LoginUsers();
+        main.setVisible(true);
+        main.pack();
+        main.setLocationRelativeTo(null);
+        main.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_jLabel8MouseClicked
+
+    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
+        // TODO add your handling code here:
+        
+        
+            adduser adminregis = new adduser();
+            adminregis.setVisible(true);
+            adminregis.pack();
+            adminregis.setLocationRelativeTo(null);
+            adminregis.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            this.dispose();
+        
+        
+            
+    }//GEN-LAST:event_jLabel9MouseClicked
+
+    private void jsold2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jsold2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jsold2MouseClicked
+
+    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
+        // TODO add your handling code here:
+        LoginUsers main = new  LoginUsers();
+        main.setVisible(true);
+        main.pack();
+        main.setLocationRelativeTo(null);
+        main.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_jLabel11MouseClicked
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        // TODO add your handling code here:
+        LoginUsers cashregis = new  LoginUsers();
+            cashregis.setVisible(true);
+            cashregis.pack();
+            cashregis.setLocationRelativeTo(null);
+            cashregis.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            this.dispose();
+    }//GEN-LAST:event_jLabel1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -690,23 +934,32 @@ public class adminpage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel activeuser;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTextField date;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JLabel jallusers;
     private javax.swing.JLabel jcash;
     private javax.swing.JLabel jcategory;
     private javax.swing.JLabel jinventory1;
-    private javax.swing.JButton jlogin;
-    private javax.swing.JButton jlogin1;
     private javax.swing.JLabel jsold;
+    private javax.swing.JLabel jsold1;
+    private javax.swing.JLabel jsold2;
+    private javax.swing.JTextField time;
     // End of variables declaration//GEN-END:variables
 }

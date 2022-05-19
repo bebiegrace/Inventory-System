@@ -18,8 +18,9 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import static src.adminregistrants.jTable1;
-import static src.cashierregistrants.jTable2;
+//import static src.cashierregistrants.jTable2;
 
 
 /**
@@ -67,8 +68,8 @@ public class inventorypersonregistrants extends javax.swing.JFrame {
     
   }
     
-    private void updateinvpersonusers(){
-        String sql ="select from `inventoryperson_users`";
+    private void  deleteinvpersonusers(){
+        String sql ="select id, username, password, email_id, gender,age,status from `users` where role='Staff'";
         try{
             pst=con.prepareStatement(sql);
             rs = pst.executeQuery();
@@ -85,44 +86,44 @@ public class inventorypersonregistrants extends javax.swing.JFrame {
         }
     }
     }
-    
-        public void InvenPersonuser()
-  {
-      String username = jname.getText();
-      String password = jpassword.getText();
-      String conpassword = jconfirmpassword.getText();
-      String email_id = jemailid.getText();
-      String gender = jgender.getText();
-      String age = jage.getText();
-      
-      try{
-          
-          String query ="insert into `inventoryperson_users`(Username,Password,Email_id,Gender,Age)values(?,?,?,?,?);";
-          pst = con.prepareStatement(query);
-          pst.setString(1, username);
-          pst.setString(2, password);
-          pst.setString(3, email_id);
-          pst.setString(4, gender);
-          pst.setString(5, age);
-          pst.executeUpdate();
-
-//           int i=pst.executeUpdate();
-           
-            
-            JOptionPane.showMessageDialog(null,  username+" has been successfully registered User as Inventory Person! " + "Successful with User id as Email id   "+email_id);
-                  
-//            else{
-//                      JOptionPane.showMessageDialog(null, username+"  You are NOT! successfully registered as Admin User!" + "Failed with User id as Email id"+email_id); 
-//                    }
-          
-      }catch(SQLException ex){
-           Logger.getLogger(bookshop.class.getName()).log(Level.SEVERE, null, ex);
-      }
-  }
+    //insert user to database...
+//    
+//        public void InvenPersonuser()
+//  {
+//      String username = jname.getText();
+//      String password = jpassword.getText();
+//      String email_id = jemailid.getText();
+//      String gender = jgender.getText();
+//      String age = jage.getText();
+//      
+//      try{
+//          
+//          String query ="insert into `inventoryperson_users`(Username,Password,Email_id,Gender,Age)values(?,?,?,?,?);";
+//          pst = con.prepareStatement(query);
+//          pst.setString(1, username);
+//          pst.setString(2, password);
+//          pst.setString(3, email_id);
+//          pst.setString(4, gender);
+//          pst.setString(5, age);
+//          pst.executeUpdate();
+//
+////           int i=pst.executeUpdate();
+//           
+//            
+//            JOptionPane.showMessageDialog(null,  username+" has been successfully registered User as Inventory Person! " + "Successful with User id as Email id   "+email_id);
+//                  
+////            else{
+////                      JOptionPane.showMessageDialog(null, username+"  You are NOT! successfully registered as Admin User!" + "Failed with User id as Email id"+email_id); 
+////                    }
+//          
+//      }catch(SQLException ex){
+//           Logger.getLogger(bookshop.class.getName()).log(Level.SEVERE, null, ex);
+//      }
+//  }
 
         public void inpersonsupdate(){
              try{
-           pst = con.prepareStatement("select * from `inventoryperson_users`");
+           pst = con.prepareStatement("select id, username, password, email_id, gender,age,status from `users` where role='Staff'");
            rs = pst.executeQuery();
            
            ResultSetMetaData rsd = rs.getMetaData();
@@ -137,12 +138,13 @@ public class inventorypersonregistrants extends javax.swing.JFrame {
                Vector v2 = new Vector();
                for(int i=1; i<=c; i++)
                {
-                   v2.add(rs.getString("Id"));
-                   v2.add(rs.getString("Username"));
-                   v2.add(rs.getString("Password"));
-                   v2.add(rs.getString("Email_id"));
-                   v2.add(rs.getString("Gender"));
-                   v2.add(rs.getString("Age"));
+                   v2.add(rs.getString("id"));
+                   v2.add(rs.getString("username"));
+                   v2.add(rs.getString("password"));
+                   v2.add(rs.getString("email_id"));
+                   v2.add(rs.getString("gender"));
+                   v2.add(rs.getString("age"));
+                   v2.add(rs.getString("status"));
                    
                }
                de.addRow(v2);
@@ -165,20 +167,19 @@ public class inventorypersonregistrants extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jlogin1 = new javax.swing.JButton();
-        jlogin = new javax.swing.JButton();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jclear = new javax.swing.JButton();
+        jDelete = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -186,45 +187,23 @@ public class inventorypersonregistrants extends javax.swing.JFrame {
         jage = new javax.swing.JTextField();
         jgender = new javax.swing.JTextField();
         jname = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jstatus = new javax.swing.JComboBox<>();
+        jLabel12 = new javax.swing.JLabel();
         jpassword = new javax.swing.JPasswordField();
-        jconfirmpassword = new javax.swing.JPasswordField();
-        jclear = new javax.swing.JButton();
-        jDelete = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
         jUpdate = new javax.swing.JButton();
-        jadd = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 204, 153));
+        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Id", "Username", "Password", "Email_id", "Gender", "Age"
-            }
-        ));
-        jTable3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable3MouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(jTable3);
-
-        jPanel2.setBackground(new java.awt.Color(255, 153, 102));
+        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 102, 102));
         jLabel3.setText("Username");
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel4.setText("<--");
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel4MouseClicked(evt);
-            }
-        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setText("x");
@@ -234,30 +213,37 @@ public class inventorypersonregistrants extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 204));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setText("Home");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 204, 204));
+        jLabel16.setText("Home");
+        jLabel16.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel16MouseClicked(evt);
             }
         });
 
-        jlogin1.setBackground(new java.awt.Color(255, 255, 204));
-        jlogin1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jlogin1.setText("Sign-up");
-        jlogin1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jlogin1ActionPerformed(evt);
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 204, 204));
+        jLabel15.setText("Add User Admin");
+        jLabel15.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel15MouseClicked(evt);
             }
         });
 
-        jlogin.setBackground(new java.awt.Color(255, 255, 204));
-        jlogin.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jlogin.setText("Sign-In");
-        jlogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jloginActionPerformed(evt);
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 204, 204));
+        jLabel8.setText("Sign-out");
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel8MouseClicked(evt);
+            }
+        });
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/flowercon.png"))); // NOI18N
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
             }
         });
 
@@ -266,153 +252,42 @@ public class inventorypersonregistrants extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel4)
-                .addGap(59, 59, 59)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jlogin1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(68, 68, 68)
-                .addComponent(jlogin, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(207, 207, 207)
-                .addComponent(jLabel3)
-                .addGap(56, 56, 56)
-                .addComponent(jLabel2)
-                .addGap(19, 19, 19))
+                .addComponent(jLabel16)
+                .addGap(90, 90, 90)
+                .addComponent(jLabel15)
+                .addGap(90, 90, 90)
+                .addComponent(jLabel8)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(231, 231, 231)
+                        .addComponent(jLabel2)
+                        .addGap(19, 19, 19))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addGap(59, 59, 59))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4))
-                .addGap(55, 55, 55))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(jlogin, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jlogin1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel3.setBackground(new java.awt.Color(255, 255, 204));
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 102, 0));
-        jLabel5.setText("Inventory Person Data");
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel6.setText("Username");
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel7.setText("Password");
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel8.setText("Confirm Password");
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel9.setText("Email ID");
-
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel10.setText("Gender");
-
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel11.setText("Age");
-
-        jemailid.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-
-        jage.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-
-        jgender.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-
-        jname.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-
-        jpassword.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-
-        jconfirmpassword.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jpassword, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jname, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jconfirmpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jLabel9)
-                                        .addGap(77, 77, 77)
-                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jgender, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jemailid, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel10)
-                                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                                .addGap(10, 10, 10)
-                                                .addComponent(jLabel11)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jage, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(72, 72, 72)
-                        .addComponent(jLabel5)))
-                .addContainerGap(29, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5)
-                .addGap(58, 58, 58)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jname, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(19, 19, 19)))
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel7)
-                            .addComponent(jpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(23, 23, 23)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jconfirmpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8))
-                        .addGap(22, 22, 22)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jemailid, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jgender, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jage, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel3))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         jclear.setBackground(new java.awt.Color(255, 255, 204));
@@ -433,6 +308,133 @@ public class inventorypersonregistrants extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 153));
+        jLabel1.setText("Inventory Person Users");
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 204));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel6.setText("Username");
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel7.setText("Password");
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel9.setText("Email ID");
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel10.setText("Gender");
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel11.setText("Age");
+
+        jemailid.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        jage.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        jgender.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        jname.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 102, 0));
+        jLabel5.setText("Cashier User Data");
+
+        jstatus.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jstatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Inactive" }));
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel12.setText("Status");
+
+        jpassword.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel6)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel9)
+                                .addComponent(jLabel7)
+                                .addComponent(jLabel10)
+                                .addComponent(jLabel11)
+                                .addComponent(jLabel12)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(69, 69, 69)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jstatus, 0, 161, Short.MAX_VALUE)
+                                    .addComponent(jemailid)
+                                    .addComponent(jgender))
+                                .addGap(0, 2, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jname, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                                    .addComponent(jpassword)))))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(138, 138, 138)
+                        .addComponent(jage, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 12, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(90, 90, 90)
+                .addComponent(jLabel5)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel12)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(26, 26, 26)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(jname, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(17, 17, 17)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(jpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(11, 11, 11)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel9)
+                            .addComponent(jemailid, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jgender, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jage, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11))
+                        .addGap(27, 27, 27)
+                        .addComponent(jstatus, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(32, Short.MAX_VALUE))
+        );
+
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Id", "Username", "Password", "Email_id", "Gender", "Age", "Status"
+            }
+        ));
+        jTable3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable3MouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTable3);
+
         jUpdate.setBackground(new java.awt.Color(255, 255, 204));
         jUpdate.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jUpdate.setText("Update");
@@ -442,65 +444,49 @@ public class inventorypersonregistrants extends javax.swing.JFrame {
             }
         });
 
-        jadd.setBackground(new java.awt.Color(255, 255, 204));
-        jadd.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jadd.setText("Add");
-        jadd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jaddActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 102, 0));
-        jLabel1.setText("Inventory Person Registrants");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(27, 27, 27)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jadd, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jclear, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45)
+                        .addGap(69, 69, 69)
                         .addComponent(jUpdate)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                        .addGap(76, 76, 76)
                         .addComponent(jDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(107, 107, 107)
+                        .addGap(92, 92, 92))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(180, 180, 180))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(76, 76, 76)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
                         .addComponent(jLabel1)
-                        .addGap(25, 25, 25)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(47, 47, 47)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jadd, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jclear, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27))
+                            .addComponent(jDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -508,8 +494,8 @@ public class inventorypersonregistrants extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 2, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -519,197 +505,11 @@ public class inventorypersonregistrants extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jaddActionPerformed
-        // TODO add your handling code here:
-//
-//        registerinventoryperson reginventory = new registerinventoryperson();
-//        reginventory .setVisible(true);
-//        reginventory .pack();
-//       reginventory .setLocationRelativeTo(null);
-//        reginventory .setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-//        this.dispose();
-        
-        String username=jname.getText();
-        String password=String.valueOf(jpassword.getText());
-        String conpassword=String.valueOf(jconfirmpassword.getText());
-        String email_id=jemailid.getText();
-        String gender= jgender.getText();
-        String age= jage.getText();
-        
-         if (username.trim().equals("") || username.trim().equals("") ||   
-            password.trim().equals("") || password.trim().equals("") ||
-            conpassword.trim().equals("") ||  conpassword.trim().equals("") ||
-            email_id.trim().equals("") || email_id.trim().equals("") ||
-             gender.trim().equals("") ||  gender.trim().equals("") ||
-           age.trim().equals("") ||  age.trim().equals(""))
-                
-            {
-            JOptionPane.showMessageDialog(null, "Other fields are empty!");
-            }
-         
-         else if(password.equals(conpassword)){
-             
-         }
-         
-        else {
-
-            JOptionPane.showMessageDialog(null, "Password and Confirm Password must be same!!");
-            jpassword.setText("");
-            jconfirmpassword.setText("");
-        }
-
-//         cant proceed if not all correct...
-        if(jname.getText().length()<=0 ||
-            jpassword.getText().length()<=0 ||
-            jconfirmpassword.getText().length()<=0 ||
-            jemailid.getText().length()<=0 ||
-            jgender.getText().length()<=0 ||
-            jage.getText().length()<=0 )
-           
-        {
-
-        }  //show the table...
-        else
-        {
-          JOptionPane.showMessageDialog(null, "User Successfully Added!");
-           inventorypersonregistrants invregis = new   inventorypersonregistrants ();
-         invregis .setVisible(true);
-         invregis .pack();
-         invregis .setLocationRelativeTo(null);
-         invregis .setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-         this.dispose();
-            
-            InvenPersonuser();
-        }
-           
-         
-
-        try {
-            Statement st = con.createStatement();
-            String query1 = "select * from `inventoryperson_users` ";
-            ResultSet rs1 = st.executeQuery(query1);
-            
-            while(rs1.next()){
-                //data wil added until finished..
-                String id = rs1.getString("Id");
-                String username1 = rs1.getString("Username");
-                String password1 = rs1.getString("Password");
-                String email_id1 = rs1.getString("Email_id");
-                String gender1 = rs1.getString("Gender");
-                String age1 = rs1.getString("Age");
-                
-                //string array for store data into jtable..
-                String tbData[] = {id,username1,password1,email_id1,gender1,age1};
-                DefaultTableModel tblModel = (DefaultTableModel)jTable3.getModel();
-
-                //add string array data into jtable..
-                
-                tblModel.addRow(tbData);
-
-            }
-            
-//            con.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(registeradmin.class.getName()).log(Level.SEVERE, null, ex);
-        }
-               
-    }//GEN-LAST:event_jaddActionPerformed
-
-    private void jUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jUpdateActionPerformed
-        // TODO add your handling code here:
-          DefaultTableModel model2 = (DefaultTableModel) jTable3.getModel();
-        int Myindex = jTable3.getSelectedRow();
-        int Mycolumn = jTable3.getSelectedColumn();
-        
-        String value = model2.getValueAt(Myindex, Mycolumn).toString();
-        int id = Integer.parseInt(model2.getValueAt(Myindex, 0).toString());
-         String uname = jname.getText();
-         String pass = jpassword.getText();
-         String emai1 = jemailid.getText();
-         String gend = jgender.getText();
-         String agedd = jage.getText();
-         
-         
-         try{
-             pst = con.prepareStatement("UPDATE `inventoryperson_users` set Username= ?, Password= ?, Email_id= ?, Gender= ?, Age= ? where Id= ?");
-//           
-             pst.setString(1, uname );
-             pst.setString(2, pass);
-             pst.setString(3,emai1);
-             pst.setString(4, gend);
-             pst.setString(5, agedd);
-             pst.setInt(6, id);
-             
-             int k= pst.executeUpdate();
-             
-             if(k==1)
-             {
-                 JOptionPane.showMessageDialog(this, "Successfully Updated");
-                 jname.setText("");
-                 jpassword.setText("");
-                 jemailid.setText("");
-                 jgender.setText("");
-                 jage.setText("");
-                 jname.requestFocus();
-                 
-                inpersonsupdate();
-                 
-               jadd.setEnabled(true);
-                 
-             }
-         } catch (SQLException ex) {
-            Logger.getLogger(inventorypage.class.getName()).log(Level.SEVERE, null, ex);
-        }
-               jadd.setEnabled(true);
-    }//GEN-LAST:event_jUpdateActionPerformed
-
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         // TODO add your handling code here:
         
                 System.exit(0);
     }//GEN-LAST:event_jLabel2MouseClicked
-
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-        // TODO add your handling code here:
-       
-        
-         adminpage regcas = new  adminpage();
-        regcas.setVisible(true);
-        regcas.pack();
-        regcas.setLocationRelativeTo(null);
-        regcas.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.dispose();
-        
-//         
-//        try {
-//            Statement st = con.createStatement();
-//            String query1 = "select * from `admin_users` ";
-//            ResultSet rs1 = st.executeQuery(query1);
-//            
-//            while(rs1.next()){
-//                //data wil added until finished..
-//                
-//                String username1 = rs1.getString("Username");
-//                String password1 = rs1.getString("Password");
-//                String email_id1 = rs1.getString("Email_id");
-//                String gender1 = rs1.getString("Gender");
-//                String age1 = rs1.getString("Age");
-//                
-//                //string array for store data into jtable..
-//                String tbData[] = {username1,password1,email_id1,gender1,age1};
-//                  DefaultTableModel tblModel = (DefaultTableModel)jTable1.getModel();
-//
-//                //add string array data into jtable..
-//                
-//                tblModel.addRow(tbData);
-//
-//            }
-//            
-////            con.close();
-//        } catch (SQLException ex) {
-//            Logger.getLogger(registeradmin.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-    }//GEN-LAST:event_jLabel4MouseClicked
 
     private void jDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDeleteActionPerformed
         // TODO add your handling code here:
@@ -717,13 +517,13 @@ public class inventorypersonregistrants extends javax.swing.JFrame {
  
         int row =jTable3.getSelectedRow();
         String cell = jTable3.getModel().getValueAt(row, 0).toString();
-        String sql="DELETE FROM `inventoryperson_users` where Id= " + cell;
+        String sql="DELETE FROM `users` where id= " + cell;
         
         try{
             pst = con.prepareStatement(sql);
             pst.execute();
             JOptionPane.showMessageDialog(null, "Successfully Deleted!");
-            updateinvpersonusers();
+            deleteinvpersonusers();
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -746,70 +546,152 @@ public class inventorypersonregistrants extends javax.swing.JFrame {
              jemailid.setText("");
              jgender.setText("");
              jage.setText("");
+             jstatus.setSelectedIndex(0);
              
          }
         }
-              jadd.setEnabled(true);
+          
     }//GEN-LAST:event_jDeleteActionPerformed
-
-    private void jTable3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseClicked
-        // TODO add your handling code here:
-        
-         DefaultTableModel model2 = (DefaultTableModel) jTable3.getModel();
-        int Myindex = jTable3.getSelectedRow();
-        int Mycolumn = jTable3.getSelectedColumn();
-        
-        String value = model2.getValueAt(Myindex, Mycolumn).toString();
-        
-        int id = Integer.parseInt(model2.getValueAt(Myindex, 0).toString());
-        jname.setText(model2.getValueAt(Myindex, 1).toString());
-        jpassword.setText(model2.getValueAt(Myindex, 2).toString());
-        jemailid.setText(model2.getValueAt(Myindex, 3).toString());
-        jgender.setText(model2.getValueAt(Myindex, 4).toString());
-        jage.setText(model2.getValueAt(Myindex, 5).toString());
-        jadd.setEnabled(false);
-    }//GEN-LAST:event_jTable3MouseClicked
 
     private void jclearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jclearActionPerformed
         // TODO add your handling code here:
         
         jname.setText("");
         jpassword.setText("");
-        jconfirmpassword.setText("");
+     
         jemailid.setText("");
         jgender.setText("");
         jage.setText("");
+        jstatus.setSelectedIndex(0);
     }//GEN-LAST:event_jclearActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jTable3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseClicked
         // TODO add your handling code here:
-        mainform main = new mainform();
+         jname.setEnabled(false);
+          jpassword.setEnabled(false);
+           jemailid.setEnabled(false);
+            jgender.setEnabled(false);
+             jage.setEnabled(false);
+        int Myindex = jTable3.getSelectedRow();
+        TableModel model2 = (TableModel) jTable3.getModel();
+
+        int Mycolumn = jTable3.getSelectedColumn();
+
+        String value = model2.getValueAt(Myindex, Mycolumn).toString();
+
+//        int id = Integer.parseInt(model2.getValueAt(Myindex, 0).toString());
+
+        jname.setText(model2.getValueAt(Myindex, 1).toString());
+        jpassword.setText(model2.getValueAt(Myindex, 2).toString());
+        jemailid.setText(model2.getValueAt(Myindex, 3).toString());
+        jgender.setText(model2.getValueAt(Myindex, 4).toString());
+        jage.setText(model2.getValueAt(Myindex, 5).toString());
+
+        String statusa = model2.getValueAt(Myindex, 6).toString();
+        switch(statusa){
+            case "active":
+            jstatus.setSelectedIndex(0);
+            break;
+            case "inactive":
+            jstatus.setSelectedIndex(1);
+            break;
+        }
+
+    }//GEN-LAST:event_jTable3MouseClicked
+
+    private void jUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jUpdateActionPerformed
+        // TODO add your handling code here:
+
+        DefaultTableModel model2 = (DefaultTableModel) jTable3.getModel();
+        int Myindex = jTable3.getSelectedRow();
+        int Mycolumn = jTable3.getSelectedColumn();
+
+        String value = model2.getValueAt(Myindex, Mycolumn).toString();
+        int id = Integer.parseInt(model2.getValueAt(Myindex, 0).toString());
+        String uname = jname.getText();
+        String pass = jpassword.getText();
+        String emai1 = jemailid.getText();
+        String gend = jgender.getText();
+        String agedd = jage.getText();
+        String status;
+       status = jstatus.getSelectedItem().toString();
+
+        try{
+            pst = con.prepareStatement("UPDATE users set username= ?, password= ?, email_id= ?, gender= ?, age= ?, status= ? where id= ?");
+            //
+            pst.setString(1, uname );
+            pst.setString(2, pass);
+            pst.setString(3,emai1);
+            pst.setString(4, gend);
+            pst.setString(5, agedd);
+             pst.setString(6, status);
+            pst.setInt(7, id);
+
+            int k= pst.executeUpdate();
+
+            if(k==1)
+            {
+                JOptionPane.showMessageDialog(this, "User Updated");
+                jname.setText("");
+                jpassword.setText("");
+                jemailid.setText("");
+                jgender.setText("");
+                jage.setText("");
+                jstatus.setSelectedIndex(0);
+                jname.requestFocus();
+
+               inpersonsupdate();
+
+                //                jadd.setEnabled(true);
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(inventorypage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jUpdateActionPerformed
+
+    private void jLabel16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseClicked
+        // TODO add your handling code here:
+        adminpage admin = new adminpage();
+        admin.setVisible(true);
+        admin.pack();
+        admin.setLocationRelativeTo(null);
+        admin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.dispose();
+
+    }//GEN-LAST:event_jLabel16MouseClicked
+
+    private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
+        // TODO add your handling code here:
+
+        adduser adminregis = new adduser();
+        adminregis.setVisible(true);
+        adminregis.pack();
+        adminregis.setLocationRelativeTo(null);
+        adminregis.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_jLabel15MouseClicked
+
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+        // TODO add your handling code here:
+        LoginUsers main = new  LoginUsers();
         main.setVisible(true);
         main.pack();
         main.setLocationRelativeTo(null);
         main.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jLabel8MouseClicked
 
-    private void jloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jloginActionPerformed
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         // TODO add your handling code here:
-
-        loginadmin logad = new loginadmin();
-        logad.setVisible(true);
-        logad.pack();
-        logad.setLocationRelativeTo(null);
-        logad.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
+           LoginUsers cashregis = new LoginUsers();
+        cashregis.setVisible(true);
+        cashregis.pack();
+        cashregis.setLocationRelativeTo(null);
+        cashregis.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.dispose();
-    }//GEN-LAST:event_jloginActionPerformed
-
-    private void jlogin1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jlogin1ActionPerformed
-        registeradmin regadmin = new  registeradmin();
-        regadmin.setVisible(true);
-        regadmin.pack();
-        regadmin.setLocationRelativeTo(null);
-        regadmin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.dispose();
-    }//GEN-LAST:event_jlogin1ActionPerformed
+    }//GEN-LAST:event_jLabel4MouseClicked
 
     /**
      * @param args the command line arguments
@@ -847,11 +729,13 @@ public class inventorypersonregistrants extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jDelete;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -866,15 +750,12 @@ public class inventorypersonregistrants extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable jTable3;
     private javax.swing.JButton jUpdate;
-    private javax.swing.JButton jadd;
     public javax.swing.JTextField jage;
     private javax.swing.JButton jclear;
-    public javax.swing.JPasswordField jconfirmpassword;
     public javax.swing.JTextField jemailid;
     public javax.swing.JTextField jgender;
-    private javax.swing.JButton jlogin;
-    private javax.swing.JButton jlogin1;
     public javax.swing.JTextField jname;
     public javax.swing.JPasswordField jpassword;
+    private javax.swing.JComboBox<String> jstatus;
     // End of variables declaration//GEN-END:variables
 }

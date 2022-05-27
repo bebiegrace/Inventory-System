@@ -5,12 +5,22 @@
  */
 package src;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
+import javax.swing.table.DefaultTableModel;
+import static src.adminpage.jTable20;
 
 /**
  *
@@ -21,12 +31,42 @@ public class LoginUsers extends javax.swing.JFrame {
     /**
      * Creates new form LoginUsers
      */
+    
+    static int id;
     My_Connection myc;
 
     public LoginUsers() {
         initComponents();
         myc = new My_Connection();
+        dt();
+        time();
     }
+   
+    
+     public void dt(){
+         
+         Date d = new Date();
+         
+         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+         
+         String dd = sdf.format(d);
+         date.setText(dd);
+     }
+         Timer t;
+         SimpleDateFormat st;
+          public void time(){
+              t = new Timer(0, new ActionListener(){
+                  @Override
+                  public void actionPerformed(ActionEvent e){
+                      Date dt = new Date();
+                      st = new SimpleDateFormat("hh-mm-ss a");
+                      String tt =st.format(dt);
+                      time.setText(tt);
+                      
+                  }
+              });
+                  t.start();    
+          }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -56,6 +96,11 @@ public class LoginUsers extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        date = new javax.swing.JTextField();
+        time = new javax.swing.JTextField();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -210,6 +255,55 @@ public class LoginUsers extends javax.swing.JFrame {
         jLabel19.setForeground(new java.awt.Color(204, 255, 153));
         jLabel19.setText("Bebie's Flower Shop");
 
+        jPanel5.setBackground(new java.awt.Color(153, 153, 153));
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel12.setText("Date:");
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel13.setText("Time:");
+
+        date.setBackground(new java.awt.Color(51, 51, 51));
+        date.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        date.setForeground(new java.awt.Color(255, 51, 51));
+        date.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        date.setText("0");
+
+        time.setBackground(new java.awt.Color(51, 51, 51));
+        time.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        time.setForeground(new java.awt.Color(255, 51, 51));
+        time.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        time.setText("0");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel12))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(time, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                    .addComponent(date))
+                .addContainerGap(37, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(time, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -232,47 +326,56 @@ public class LoginUsers extends javax.swing.JFrame {
                                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(53, 53, 53))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
+                        .addGap(83, 83, 83)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jcancel, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(60, 60, 60)
-                                .addComponent(jclear, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jclear, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(57, 57, 57)
                                 .addComponent(jlogin, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(14, 14, 14))
                             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                .addComponent(jLabel10)
-                .addGap(533, 533, 533))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel10)
+                        .addGap(533, 533, 533))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(158, 158, 158)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel19)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jclear, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlogin, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcancel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
-                .addGap(23, 23, 23))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel19)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jclear, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcancel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10)
+                            .addComponent(jlogin, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(93, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -281,14 +384,14 @@ public class LoginUsers extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 10, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        setSize(new java.awt.Dimension(1008, 630));
+        setSize(new java.awt.Dimension(966, 630));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -301,7 +404,9 @@ public class LoginUsers extends javax.swing.JFrame {
 //        logf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 //        this.dispose();
     }//GEN-LAST:event_jLabel4MouseClicked
-
+   public static int ID(){
+        return id;
+    }
     private void jclearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jclearActionPerformed
         // TODO add your handling code here:
 
@@ -328,38 +433,164 @@ public class LoginUsers extends javax.swing.JFrame {
         } else {
             
             try {
+//                Connection con = myc.getConn();
+//                String sql = "SELECT * FROM users";
+//                PreparedStatement pst = con.prepareStatement(sql);
                 Connection con = myc.getConn();
-                String sql = "SELECT * FROM `users` WHERE  username=? AND password=?";
+                String sql = "SELECT * FROM users WHERE  username=? AND password=?";
                 PreparedStatement pst = con.prepareStatement(sql);
                 pst.setString(1, uname);
                 pst.setString(2, pass);
 //                pst.setString(3, usertype1);
 //                pst.setString(4, stats);
+//                pst.setString(3, usertype1);
+//                pst.setString(4, stats);
 
                 ResultSet rs = pst.executeQuery();
                 
-                if (rs.next()) {
+                  if (rs.next()) {
                     if(rs.getString(8).equals("Inactive")){
                         JOptionPane.showMessageDialog(null, "Please wait for admin approval");
                     }else{
                         if (rs.getString(7).equals("Admin")) {
                             JOptionPane.showMessageDialog(null, "Hello " + uname + "!" + " Welcome to" + "Admin" + "  Management!!");
-                            adminpage admin = new adminpage();
+//                            adminpage admin = new adminpage();
+//                            admin.show();
+//                            dispose();
+                            
+                            adminpage admin = new adminpage(jname.getText());
                             admin.show();
-                            dispose();
+                            dispose();         
+                     
+                            id=rs.getInt("id");
+                            
+                             try {
+            Statement st = con.createStatement();
+            String query1 = "select * from `users`";
+            ResultSet rs1 = st.executeQuery(query1);
+
+            while(rs1.next()){
+                //data wil added until finished..
+                String Id1 = rs1.getString("id");
+                String username1 = rs1.getString("username");
+                String password1 = rs1.getString("password");
+                String email_id1 = rs1.getString("email_id");
+                String gender1 = rs1.getString("gender");
+                String age1 = rs1.getString("age");
+                String rolr = rs1.getString("role");
+
+                String status1= rs1.getString("status");
+
+                //string array for store data into jtable..
+                String tbData[] = {Id1,username1,password1,email_id1,gender1,age1,rolr,status1};
+                DefaultTableModel tblModel = (DefaultTableModel)jTable20.getModel();
+
+                //add string array data into jtable..
+
+                tblModel.addRow(tbData);
+
+            }
+
+//            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(adduser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+                    
+//                            String usernamee = jname.getText();
+//                            new inventorypage(usernamee).setVisible(true);
+//                            setVisible(false);
+                            
                         } else if (rs.getString(7).equals("Cashier")) {
                             JOptionPane.showMessageDialog(null, "Hello " + uname + "!" + " Welcome to" + "Cashier" + "  Management!!");
-                            bookshop cash = new bookshop();
+//                            bookshop cash = new bookshop();
+//                            cash.show();
+//                            dispose();
+                            
+                            bookshop cash = new bookshop(jname.getText());
                             cash.show();
-                            dispose();
+                            dispose();         
+                     
+                             id=rs.getInt("id");
                         } else if (rs.getString(7).equals("Staff")) {
                             JOptionPane.showMessageDialog(null, "Hello " + uname + "!" + " Welcome to" + "Inventory" + "  Management!!");
-                            inventorypage inventory = new inventorypage();
-                            inventory.show();
-                            dispose();
+                            
+                            inventorypage inventory = new inventorypage(jname.getText());
+                             inventory.show();
+                            dispose();         
+//                            inventorypage inventory = new inventorypage();
+//                             inventory.show();
+//                            dispose();         
+                     
+                             id=rs.getInt("id");
+                            
                         }
+                        
+//                             String usernamee = jname.getText();
+//                            new inventorypage(usernamee).setVisible(true);
+//                            setVisible(false);
+                            
                           
                     }
+                   } else {
+                    JOptionPane.showMessageDialog(null, "Username or Password is Incorrect!!");
+                    
+                    jclearActionPerformed(evt);
+                    
+                }
+                
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Database Exception Error!!" + e);
+            } 
+                    
+                
+                
+                  //thereeeeeeeee
+//               while(rs.next()) {
+//                               
+//
+//                    if(rs.getString(8).equals("Inactive")& rs.getString(2).equals(uname) & rs.getString(3).equals(pass)){
+//                        JOptionPane.showMessageDialog(null, "Please wait for admin approval");
+//                    }else{
+//                        if (rs.getString(7).equals("Admin")& rs.getString(2).equals(uname) & rs.getString(3).equals(pass)) {
+//                            JOptionPane.showMessageDialog(null, "Hello " + uname + "!" + " Welcome to" + "Admin" + "  Management!!");
+//                            adminpage admin = new adminpage();
+//                            admin.show();
+//                            dispose();
+//                            
+//                            String usernamee = jname.getText();
+//                            new adminpage(usernamee).setVisible(true);
+//                            setVisible(false);
+//                            
+//                        } else if (rs.getString(7).equals("Cashier")& rs.getString(2).equals(uname) & rs.getString(3).equals(pass)) {
+//                            JOptionPane.showMessageDialog(null, "Hello " + uname + "!" + " Welcome to" + "Cashier" + "  Management!!");
+//                            bookshop cash = new bookshop();
+//                            cash.show();
+//                            dispose();
+//                            
+//                            String usernamee = jname.getText();
+//                            new bookshop(usernamee).setVisible(true);
+//                            setVisible(false);
+//                            
+//                        } else if (rs.getString(7).equals("Staff")& rs.getString(2).equals(uname) & rs.getString(3).equals(pass)) {
+//                            JOptionPane.showMessageDialog(null, "Hello " + uname + "!" + " Welcome to" + "Inventory" + "  Management!!");
+//                          
+//                            inventorypage inventory = new inventorypage();
+//                            inventory.show();
+//                            dispose();
+//                           
+//                            String usernamee = jname.getText();
+//                            new inventorypage(usernamee).setVisible(true);
+//                            setVisible(false);
+//                            
+//                            
+//                             id=rs.getInt("id");
+//                         
+//                          
+//                        }
+//                       }
+//                } else {
+//                    JOptionPane.showMessageDialog(null, "Username or Password is Incorrect!!");
 //                    JOptionPane.showMessageDialog(null, "Hello " + uname + "!" + " Welcome to" + usertype1 + "  Management!!");
 
 //                       if (rs.getString(8).equals("Admin")) {
@@ -386,17 +617,14 @@ public class LoginUsers extends javax.swing.JFrame {
 //                    } else {
 //                        //proceed...
 //                    }                    
-                } else {
-                    JOptionPane.showMessageDialog(null, "Username or Password is Incorrect!!");
-                    
-                    jclearActionPerformed(evt);
-                    
                 }
-                
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, "Database Exception Error!!" + e);
-            }
-        }
+                //thereeeeeeeee
+//            } catch (SQLException e) {
+//                JOptionPane.showMessageDialog(null, "Database Exception Error!!" + e);
+//            }
+//        }
+//        
+       
         
     }//GEN-LAST:event_jloginActionPerformed
 
@@ -447,9 +675,12 @@ public class LoginUsers extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField date;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -461,10 +692,12 @@ public class LoginUsers extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JButton jcancel;
     private javax.swing.JButton jclear;
     private javax.swing.JButton jlogin;
     private javax.swing.JTextField jname;
     private javax.swing.JPasswordField jpassword;
+    private javax.swing.JTextField time;
     // End of variables declaration//GEN-END:variables
 }

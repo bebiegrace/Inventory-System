@@ -5,22 +5,27 @@
  */
 package src;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import static src.ApprovedUsers.jTable11;
 
 import static src.category.jTable6;
-import static src.categoryinventory.jTable8;
+
 
 /**
  *
@@ -34,7 +39,30 @@ public class Unapproveusers extends javax.swing.JFrame {
     public Unapproveusers() {
         initComponents();
         Connect();
+        disabled();
+         dt();
+        time();
 //        toapproveuser();
+    }
+    
+     public Unapproveusers(String usernameu) {
+        initComponents();
+        juserun.setText(usernameu);
+          Connect(); 
+          disabled();
+           dt();
+        time();
+    }
+    
+    public void disabled(){
+        jname.setEnabled(false);
+        jpassword.setEnabled(false);
+        jemailid.setEnabled(false);
+        jgender.setEnabled(false);
+        jage.setEnabled(false);
+         jrole.setEnabled(false);
+           
+        
     }
     Connection con;
     PreparedStatement pst;
@@ -66,6 +94,32 @@ public class Unapproveusers extends javax.swing.JFrame {
        DefaultTableModel model11 = (DefaultTableModel)jTable11.getModel(); 
        model11.addRow(dataRow);
      }
+      
+       public void dt() {
+
+        Date d = new Date();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        String dd = sdf.format(d);
+        date1.setText(dd);
+    }
+    Timer t;
+    SimpleDateFormat st;
+
+    public void time() {
+        t = new Timer(0, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Date dt = new Date();
+                st = new SimpleDateFormat("hh-mm-ss a");
+                String tt = st.format(dt);
+                time1.setText(tt);
+
+            }
+        });
+        t.start();
+    }
       public void toapproveuser()
   {
       
@@ -79,8 +133,8 @@ public class Unapproveusers extends javax.swing.JFrame {
        String role1;
        role1=jrole.getSelectedItem().toString();
       
-       String status;
-       status=jstatus.getSelectedItem().toString();
+//       String status;
+//       status=jstatus.getSelectedItem().toString();
       
       try{
         
@@ -97,7 +151,7 @@ public class Unapproveusers extends javax.swing.JFrame {
           pst.setString(6, role1);
           
       
-          pst.setString(7, status);
+          pst.setString(7, "Active");
           pst.executeUpdate();
 
           
@@ -196,16 +250,20 @@ public class Unapproveusers extends javax.swing.JFrame {
         jpassword = new javax.swing.JPasswordField();
         jLabel5 = new javax.swing.JLabel();
         jrole = new javax.swing.JComboBox<>();
-        jstatus = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        activeuser = new javax.swing.JLabel();
+        juserun = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        date1 = new javax.swing.JTextField();
+        time1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -217,7 +275,7 @@ public class Unapproveusers extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Username", "Password", "Email id", "Gender", "Age", "Role", "Status"
+                "Id", "Username", "Password", "Email id", "Gender", "Age", "Role"
             }
         ));
         jTable10.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -245,7 +303,7 @@ public class Unapproveusers extends javax.swing.JFrame {
             }
         });
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 204));
+        jPanel3.setBackground(new java.awt.Color(102, 102, 102));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setText("Username");
@@ -269,8 +327,18 @@ public class Unapproveusers extends javax.swing.JFrame {
         jgender.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         jname.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jname.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jnameMouseClicked(evt);
+            }
+        });
 
         jpassword.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jpassword.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jpasswordMouseClicked(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 102, 0));
@@ -279,14 +347,8 @@ public class Unapproveusers extends javax.swing.JFrame {
         jrole.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jrole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cashier", "Staff", " " }));
 
-        jstatus.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jstatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Inactive" }));
-
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel12.setText("Role");
-
-        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel14.setText("Status");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -302,8 +364,7 @@ public class Unapproveusers extends javax.swing.JFrame {
                                     .addComponent(jLabel9)
                                     .addComponent(jLabel10)
                                     .addComponent(jLabel11)
-                                    .addComponent(jLabel12)
-                                    .addComponent(jLabel14))
+                                    .addComponent(jLabel12))
                                 .addGap(79, 79, 79)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -311,22 +372,21 @@ public class Unapproveusers extends javax.swing.JFrame {
                                     .addComponent(jemailid, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jgender, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jage, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jrole, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jstatus, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jrole, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jLabel6)
                                 .addComponent(jLabel7))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(90, 90, 90)
+                        .addGap(103, 103, 103)
                         .addComponent(jLabel5)))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -344,28 +404,24 @@ public class Unapproveusers extends javax.swing.JFrame {
                         .addComponent(jgender, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel10))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addGap(153, 153, 153))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jage, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jrole, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel12)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addGap(98, 98, 98)))
-                        .addComponent(jstatus, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel14))
-                .addGap(23, 23, 23))
+                        .addComponent(jage, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jrole, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12))
+                        .addGap(55, 55, 55))))
         );
 
         jPanel2.setBackground(new java.awt.Color(51, 51, 51));
 
-        activeuser.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        activeuser.setForeground(new java.awt.Color(255, 102, 102));
-        activeuser.setText("Admin user");
+        juserun.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        juserun.setForeground(new java.awt.Color(255, 0, 0));
+        juserun.setText("Admin user");
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 204, 204));
@@ -401,6 +457,8 @@ public class Unapproveusers extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/avatarbebie.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -415,8 +473,10 @@ public class Unapproveusers extends javax.swing.JFrame {
                 .addGap(87, 87, 87)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(activeuser, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41))
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(juserun, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -430,13 +490,68 @@ public class Unapproveusers extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(jLabel15)
                     .addComponent(jLabel16)
-                    .addComponent(activeuser, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(juserun, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 102));
         jLabel3.setText("Approve Users to Manage System");
+
+        jPanel6.setBackground(new java.awt.Color(153, 153, 153));
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel17.setText("Date:");
+
+        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel18.setText("Time:");
+
+        date1.setBackground(new java.awt.Color(51, 51, 51));
+        date1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        date1.setForeground(new java.awt.Color(255, 51, 51));
+        date1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        date1.setText("0");
+
+        time1.setBackground(new java.awt.Color(51, 51, 51));
+        time1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        time1.setForeground(new java.awt.Color(255, 51, 51));
+        time1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        time1.setText("0");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel18)
+                    .addComponent(jLabel17))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(time1, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                    .addComponent(date1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(date1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jLabel18)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(time1, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -451,35 +566,38 @@ public class Unapproveusers extends javax.swing.JFrame {
                         .addGap(196, 196, 196)
                         .addComponent(japprove, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(112, 112, 112)
-                        .addComponent(jremove, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(336, 336, 336)
-                .addComponent(jLabel3)
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jremove, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(38, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(japprove, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jremove, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(58, 58, 58))))
+                        .addGap(58, 58, 58))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(97, 97, 97))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -525,15 +643,15 @@ public class Unapproveusers extends javax.swing.JFrame {
                 break;        
         }
         
-        String statusa = model2.getValueAt(Myindex, 7).toString();
-        switch(statusa){
-            case "Active":
-                jstatus.setSelectedIndex(0);
-                break;
-            case "Inactive":
-                jstatus.setSelectedIndex(1);
-                break;        
-        }
+//        String statusa = model2.getValueAt(Myindex, 7).toString();
+//        switch(statusa){
+//            case "Active":
+//                jstatus.setSelectedIndex(0);
+//                break;
+//            case "Inactive":
+//                jstatus.setSelectedIndex(1);
+//                break;        
+//        }
         
         
     }//GEN-LAST:event_jTable10MouseClicked
@@ -584,7 +702,7 @@ public class Unapproveusers extends javax.swing.JFrame {
               jgender.setText("");
               jage.setText("");
               jrole.setSelectedIndex(0);
-              jstatus.setSelectedIndex(0);
+//              jstatus.setSelectedIndex(0);
          }
        }
       
@@ -673,24 +791,17 @@ public class Unapproveusers extends javax.swing.JFrame {
 
     private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
         // TODO add your handling code here:
-
-        adduser adminregis = new adduser();
-        adminregis.setVisible(true);
-        adminregis.pack();
-        adminregis.setLocationRelativeTo(null);
-        adminregis.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.dispose();
+        adduser admin = new adduser(juserun.getText());
+        admin.show();
+        dispose();
 
     }//GEN-LAST:event_jLabel15MouseClicked
 
     private void jLabel16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseClicked
         // TODO add your handling code here:
-        adminpage admin = new adminpage();
-        admin.setVisible(true);
-        admin.pack();
-        admin.setLocationRelativeTo(null);
-        admin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.dispose();
+        adminpage admin = new adminpage(juserun.getText());
+        admin.show();
+        dispose();
         
     }//GEN-LAST:event_jLabel16MouseClicked
 
@@ -704,6 +815,16 @@ public class Unapproveusers extends javax.swing.JFrame {
         cashregis.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.dispose();
     }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void jnameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jnameMouseClicked
+        // TODO add your handling code here:
+        jname.setEnabled(false);
+    }//GEN-LAST:event_jnameMouseClicked
+
+    private void jpasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpasswordMouseClicked
+        // TODO add your handling code here:
+        jpassword.setEnabled(false);
+    }//GEN-LAST:event_jpasswordMouseClicked
 
     /**
      * @param args the command line arguments
@@ -741,14 +862,19 @@ public class Unapproveusers extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel activeuser;
+    private javax.swing.JTextField date;
+    private javax.swing.JTextField date1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -758,6 +884,8 @@ public class Unapproveusers extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable jTable10;
     public javax.swing.JTextField jage;
@@ -768,6 +896,8 @@ public class Unapproveusers extends javax.swing.JFrame {
     public javax.swing.JPasswordField jpassword;
     private javax.swing.JButton jremove;
     private javax.swing.JComboBox<String> jrole;
-    private javax.swing.JComboBox<String> jstatus;
+    public javax.swing.JLabel juserun;
+    private javax.swing.JTextField time;
+    private javax.swing.JTextField time1;
     // End of variables declaration//GEN-END:variables
 }

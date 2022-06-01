@@ -21,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import static src.Unapproveusers.jTable10;
 import static src.adminregistrants.jTable1;
+import static src.inventorypersonregistrants.jTable3;
 //import static src.cashierregistrants.jTable2;
 
 /**
@@ -502,6 +503,7 @@ public class cashierusers extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTable12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable12MouseClicked
@@ -551,7 +553,7 @@ public class cashierusers extends javax.swing.JFrame {
 
     private void jUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jUpdateActionPerformed
         // TODO add your handling code here:
-
+    if(jTable12.getSelectedRowCount() == 1){
         DefaultTableModel model2 = (DefaultTableModel) jTable12.getModel();
         int Myindex = jTable12.getSelectedRow();
         int Mycolumn = jTable12.getSelectedColumn();
@@ -598,11 +600,25 @@ public class cashierusers extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(inventorypage.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+         else{
+         
+           if(jTable12.getSelectedRowCount() == 0){
+               //if table is empty np data the show message..
+                JOptionPane.showMessageDialog(null, "Field is empty!");
+           }
+    }
+    
+   
+    
 
     }//GEN-LAST:event_jUpdateActionPerformed
 
     private void jDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDeleteActionPerformed
         // TODO add your handling code here:
+        
+        if(jTable12.getSelectedRowCount() == 1){
         int row =jTable12.getSelectedRow();
         String cell = jTable12.getModel().getValueAt(row, 0).toString();
         String sql="DELETE FROM `users` where id= " + cell;
@@ -635,6 +651,16 @@ public class cashierusers extends javax.swing.JFrame {
                 jage.setText("");
             }
         }
+        }
+         else{
+         
+           if(jTable12.getSelectedRowCount() == 0){
+               //if table is empty np data the show message..
+                JOptionPane.showMessageDialog(null, "Field is empty!");
+           }
+    }
+        
+        
 //        jadd.setEnabled(true);
 
     }//GEN-LAST:event_jDeleteActionPerformed

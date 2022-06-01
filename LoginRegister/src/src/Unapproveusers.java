@@ -660,8 +660,9 @@ public class Unapproveusers extends javax.swing.JFrame {
         
         DefaultTableModel tbmodel = (DefaultTableModel)jTable10.getModel();
         if(jTable10.getSelectedRowCount() == 1){
-          JOptionPane.showMessageDialog(null, "Approved!");
           toapproveuser();
+          JOptionPane.showMessageDialog(null, "Approved!");
+        
           
           //      to remove approved applicants/registrants..  
         String role1;
@@ -862,14 +863,11 @@ public class Unapproveusers extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField date;
     private javax.swing.JTextField date1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -884,7 +882,6 @@ public class Unapproveusers extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable jTable10;
@@ -897,7 +894,6 @@ public class Unapproveusers extends javax.swing.JFrame {
     private javax.swing.JButton jremove;
     private javax.swing.JComboBox<String> jrole;
     public javax.swing.JLabel juserun;
-    private javax.swing.JTextField time;
     private javax.swing.JTextField time1;
     // End of variables declaration//GEN-END:variables
 }

@@ -19,6 +19,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import static src.Unapproveusers.jTable10;
 import static src.adminregistrants.jTable1;
 //import static src.cashierregistrants.jTable2;
 
@@ -504,7 +505,7 @@ public class inventorypersonregistrants extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -512,12 +513,13 @@ public class inventorypersonregistrants extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDeleteActionPerformed
         // TODO add your handling code here:
-        
- 
+         
+    if(jTable3.getSelectedRowCount() == 1){
         int row =jTable3.getSelectedRow();
         String cell = jTable3.getModel().getValueAt(row, 0).toString();
         String sql="DELETE FROM `users` where id= " + cell;
@@ -554,7 +556,17 @@ public class inventorypersonregistrants extends javax.swing.JFrame {
              
          }
         }
-          
+          }else{
+           if(jTable3.getSelectedRowCount() == 0){
+               //if table is empty np data the show message..
+                JOptionPane.showMessageDialog(null, "Field is empty!");
+           }else{
+                    JOptionPane.showMessageDialog(null, "Please select a single row to delete!");
+           }
+       }
+      
+                
+         
     }//GEN-LAST:event_jDeleteActionPerformed
 
     private void jclearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jclearActionPerformed
@@ -606,7 +618,9 @@ public class inventorypersonregistrants extends javax.swing.JFrame {
 
     private void jUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jUpdateActionPerformed
         // TODO add your handling code here:
-
+     
+      if(jTable3.getSelectedRowCount() == 1){
+       
         DefaultTableModel model2 = (DefaultTableModel) jTable3.getModel();
         int Myindex = jTable3.getSelectedRow();
         int Mycolumn = jTable3.getSelectedColumn();
@@ -621,6 +635,9 @@ public class inventorypersonregistrants extends javax.swing.JFrame {
         String status;
        status = jstatus.getSelectedItem().toString();
        
+ 
+     
+  
 
         try{
             pst = con.prepareStatement("UPDATE users set username= ?, password= ?, email_id= ?, gender= ?, age= ?, status= ? where id= ?");
@@ -650,12 +667,30 @@ public class inventorypersonregistrants extends javax.swing.JFrame {
 
                inpersonsupdate();
 
-                //                jadd.setEnabled(true);
-
             }
-        } catch (SQLException ex) {
+  
+          }catch (SQLException ex) {
             Logger.getLogger(inventorypage.class.getName()).log(Level.SEVERE, null, ex);
         }
+      }
+      else{
+         
+           if(jTable3.getSelectedRowCount() == 0){
+               //if table is empty np data the show message..
+                JOptionPane.showMessageDialog(null, "Field is empty!");
+           }else 
+                   {
+                    JOptionPane.showMessageDialog(null, "Please select a single row to update!");
+           }
+       }
+      
+                   
+        
+       
+            
+     
+            
+   
     }//GEN-LAST:event_jUpdateActionPerformed
 
     private void jLabel16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseClicked

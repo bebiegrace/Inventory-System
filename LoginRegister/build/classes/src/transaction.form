@@ -30,12 +30,15 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel6" alignment="1" max="32767" attributes="0"/>
+          <Component id="jPanel6" min="-2" pref="1145" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel6" alignment="0" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="13" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -51,46 +54,49 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                          <Component id="jScrollPane2" max="32767" attributes="0"/>
-                          <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
-                      </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane4" min="-2" pref="769" max="-2" attributes="0"/>
+                          <Component id="jLabel6" min="-2" pref="200" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jScrollPane4" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="jDateChooser2" alignment="0" pref="154" max="32767" attributes="0"/>
+                      <Component id="perstaff" alignment="0" max="32767" attributes="0"/>
+                      <Component id="percashier" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jDateChooser1" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jComboBox4" min="-2" pref="154" max="-2" attributes="0"/>
-                              <Component id="perstaff" min="-2" pref="154" max="-2" attributes="0"/>
-                              <Component id="jComboBox5" alignment="0" min="-2" pref="154" max="-2" attributes="0"/>
-                              <Component id="percashier" alignment="0" min="-2" pref="154" max="-2" attributes="0"/>
-                              <Component id="jComboBox7" alignment="0" min="-2" pref="154" max="-2" attributes="0"/>
-                          </Group>
                           <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                               <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                              <Component id="jButton4" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Component id="jComboBox8" min="-2" pref="154" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="123" max="-2" attributes="0"/>
               </Group>
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jPanel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="348" max="-2" attributes="0"/>
-                          <Component id="jLabel6" min="-2" pref="200" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="341" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel7" min="-2" pref="203" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -102,23 +108,24 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                   <Component id="jLabel6" min="-2" pref="39" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane2" min="-2" pref="203" max="-2" attributes="0"/>
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jButton1" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                              <Component id="perstaff" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                      <Component id="jScrollPane2" min="-2" pref="151" max="-2" attributes="0"/>
+                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                          <Component id="jButton3" min="-2" pref="32" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="perstaff" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                                  <Component id="jButton1" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                              <Component id="jDateChooser1" min="-2" pref="32" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                          <Component id="jComboBox4" min="-2" pref="32" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                          <Component id="jComboBox5" min="-2" pref="32" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
                   <Component id="jLabel7" min="-2" pref="40" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -127,14 +134,15 @@
                               <Component id="percashier" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                               <Component id="jButton2" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="jComboBox7" min="-2" pref="32" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                          <Component id="jComboBox8" min="-2" pref="32" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="jDateChooser2" min="-2" pref="37" max="-2" attributes="0"/>
+                              <Component id="jButton4" min="-2" pref="32" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <Component id="jScrollPane4" alignment="0" min="-2" pref="195" max="-2" attributes="0"/>
+                      <Component id="jScrollPane4" alignment="0" min="-2" pref="164" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="72" max="32767" attributes="0"/>
+                  <EmptySpace pref="58" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -365,7 +373,7 @@
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="cc" green="ff" red="ff" type="rgb"/>
+              <Color blue="66" green="66" red="ff" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="18" style="1"/>
@@ -381,7 +389,7 @@
         <Component class="javax.swing.JLabel" name="jLabel7">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="cc" green="ff" red="ff" type="rgb"/>
+              <Color blue="66" green="66" red="ff" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="18" style="1"/>
@@ -483,75 +491,7 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox4">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="cc" green="cc" red="ff" type="rgb"/>
-            </Property>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="12" style="1"/>
-            </Property>
-            <Property name="maximumRowCount" type="int" value="20"/>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="0"/>
-            </Property>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
-          </AuxValues>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox5">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="cc" green="cc" red="ff" type="rgb"/>
-            </Property>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="12" style="1"/>
-            </Property>
-            <Property name="maximumRowCount" type="int" value="20"/>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="0"/>
-            </Property>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
-          </AuxValues>
-        </Component>
         <Component class="javax.swing.JComboBox" name="percashier">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="cc" green="cc" red="ff" type="rgb"/>
-            </Property>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="12" style="1"/>
-            </Property>
-            <Property name="maximumRowCount" type="int" value="20"/>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="0"/>
-            </Property>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
-          </AuxValues>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox7">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="cc" green="cc" red="ff" type="rgb"/>
-            </Property>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="12" style="1"/>
-            </Property>
-            <Property name="maximumRowCount" type="int" value="20"/>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="0"/>
-            </Property>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
-          </AuxValues>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox8">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="cc" green="cc" red="ff" type="rgb"/>
@@ -600,6 +540,50 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButton3">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="99" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="14" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="33" green="0" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="View"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
+          <Properties>
+            <Property name="dateFormatString" type="java.lang.String" value="yyyy/MM/dd"/>
+          </Properties>
+        </Component>
+        <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser2">
+          <Properties>
+            <Property name="dateFormatString" type="java.lang.String" value="yyyy/MM/dd"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButton4">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="99" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="14" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="View"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

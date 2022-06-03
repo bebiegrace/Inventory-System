@@ -21,8 +21,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import static src.Unapproveusers.jTable10;
 import static src.cashierusers.jTable12;
 import static src.inventorypage.jTable4;
@@ -361,10 +363,10 @@ public class soldadmin extends javax.swing.JFrame {
         percashier = new javax.swing.JComboBox();
         jButton4 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        percashier1 = new javax.swing.JComboBox();
         jButton5 = new javax.swing.JButton();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -741,10 +743,6 @@ public class soldadmin extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 102, 102));
         jLabel3.setText("Date");
 
-        percashier1.setBackground(new java.awt.Color(255, 204, 204));
-        percashier1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        percashier1.setMaximumRowCount(20);
-
         jButton5.setBackground(new java.awt.Color(255, 255, 153));
         jButton5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton5.setForeground(new java.awt.Color(255, 0, 0));
@@ -758,6 +756,11 @@ public class soldadmin extends javax.swing.JFrame {
         jLabel23.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(255, 102, 102));
         jLabel23.setText("Cashier");
+        jLabel23.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel23MouseClicked(evt);
+            }
+        });
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(255, 153, 102));
@@ -767,6 +770,9 @@ public class soldadmin extends javax.swing.JFrame {
                 jLabel24MouseClicked(evt);
             }
         });
+
+        jDateChooser1.setDateFormatString("yyyy/MM/dd");
+        jDateChooser1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -833,8 +839,8 @@ public class soldadmin extends javax.swing.JFrame {
                         .addGap(69, 69, 69)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(percashier1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButton5))
                             .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -862,8 +868,8 @@ public class soldadmin extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(percashier, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(percashier1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
@@ -1196,6 +1202,9 @@ public class soldadmin extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel)jTable9.getModel();
+        TableRowSorter<DefaultTableModel> tr= new TableRowSorter<DefaultTableModel>(model);
+        jTable9.setRowSorter(tr);
         if (percashier.getSelectedIndex() == 0) {
             cashier();
         }else if(percashier.getSelectedIndex() == 1) {
@@ -1205,7 +1214,22 @@ public class soldadmin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:\
+         try{
+//        jTable16.setModel(new DefaultTableModel(null, new Object[]{"id","InventoryID","quantity","type_transaction","UserID","date","time"}));
+        SimpleDateFormat dATE = new SimpleDateFormat("yyyy/MM/dd");
+        String date1 = dATE.format(jDateChooser1.getDate());
+ 
+//        showbydate(date1);
+        DefaultTableModel model = (DefaultTableModel)jTable9.getModel();
+        TableRowSorter<DefaultTableModel> tr= new TableRowSorter<DefaultTableModel>(model);
+        jTable9.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter(date1.trim()));
+//        
+        }catch (Exception e){
+       
+        } 
+        
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jtotalbuyingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtotalbuyingActionPerformed
@@ -1214,9 +1238,16 @@ public class soldadmin extends javax.swing.JFrame {
 
     private void jLabel24MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel24MouseClicked
         // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel)jTable9.getModel();
+        TableRowSorter<DefaultTableModel> tr= new TableRowSorter<DefaultTableModel>(model);
+        jTable9.setRowSorter(tr);
      allsales();
      
     }//GEN-LAST:event_jLabel24MouseClicked
+
+    private void jLabel23MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel23MouseClicked
 
     /**
      * @param args the command line arguments
@@ -1259,6 +1290,7 @@ public class soldadmin extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1302,7 +1334,6 @@ public class soldadmin extends javax.swing.JFrame {
     private javax.swing.JTextField jtsales;
     public javax.swing.JLabel jusername;
     private javax.swing.JComboBox percashier;
-    private javax.swing.JComboBox percashier1;
     private javax.swing.JTextField time;
     // End of variables declaration//GEN-END:variables
 }

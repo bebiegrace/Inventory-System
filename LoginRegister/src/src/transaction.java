@@ -11,11 +11,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import static src.Unapproveusers.jTable10;
 import static src.inventorypage.jTable4;
 
@@ -28,11 +32,14 @@ public class transaction extends javax.swing.JFrame {
     /**
      * Creates new form cashiertransaction
      */
+     My_Connection myc;
     public transaction() {
         initComponents();
         Connect();
         pstaff();
         pscashier();
+//         showbydate("");
+          myc = new My_Connection();
     }
      public transaction(String username) {
         initComponents();
@@ -40,6 +47,8 @@ public class transaction extends javax.swing.JFrame {
         Connect();
          pstaff();
         pscashier();
+//         showbydate("");
+          myc = new My_Connection();
     }
     
      Connection con;
@@ -257,9 +266,84 @@ public class transaction extends javax.swing.JFrame {
             }
     
     }
-      
-     
-     
+//        public void showbydate(String da){
+            
+              
+//             DefaultTableModel df = (DefaultTableModel)jTable16.getModel();
+//             df.setRowCount(0);
+////             int row=jTable16.getSelectedRow();
+////             String tab=jTable16.getModel().getValueAt(row, 5).toString();
+////             Date dtg = jDateChooser1.getDate();
+//
+//         try {
+//                Statement st = con.createStatement();
+//                String query1 = "SELECT * FROM `stransaction`";
+//                ResultSet rs1 = st.executeQuery(query1);
+//                while(rs1.next()){
+//                    String id = rs1.getString("id");
+//                    String hh = rs1.getString("InventoryID");
+//                    String des1 = rs1.getString("quantity");
+//                    String trr = rs1.getString("type_transaction");
+//                    String buy = rs1.getString("UserID");
+//                    String sell1 = rs1.getString("date");
+//                    String pro = rs1.getString("time");
+//
+//                    //string array for store data into jtable..
+//                    String tbData[] = {id,hh,des1, trr ,buy,sell1,pro};
+//                    DefaultTableModel tblModel = (DefaultTableModel)jTable16.getModel();
+//
+//                    //add string array data into jtable..
+//
+//                    tblModel.addRow(tbData);
+//                    
+//                    //                    invetorytransac();
+//                }
+//
+////                con.close();
+//            } catch (SQLException ex) {
+//                Logger.getLogger(cashierusers.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//            
+            
+//          Connection cone = myc.getConn();
+//          PreparedStatement pst;
+//          
+//          ResultSet rs;
+//         try {
+//             
+//             if(da.equals(""))
+//             {
+////                  Statement st = con.createStatement();
+//                  pst = cone.prepareStatement("select * from `stransaction`");
+//                  pst.setString(1, da);
+//   
+//                 rs= pst.executeQuery();
+//            
+//                 DefaultTableModel  model =(DefaultTableModel)jTable16.getModel();
+//                 Object[] row;
+//                 
+//                 while(rs.next()){
+//                     row = new Object[7];
+//                     row[0] = rs.getInt(1);
+//                     row[1] = rs.getInt(2);
+//                     row[2] = rs.getInt(3);
+//                     row[3] = rs.getString(4);
+//                     row[4] = rs.getInt(5);
+//                     row[5] = rs.getString(6);
+//                     row[6] = rs.getString(7);
+//                     
+//                     model.addRow(row);
+//     
+//                 }
+//             }
+//         } catch (Exception ex) {
+//                Logger.getLogger(cashierusers.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//    
+//    }
+//      
+//        
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -287,13 +371,13 @@ public class transaction extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable18 = new javax.swing.JTable();
         perstaff = new javax.swing.JComboBox();
-        jComboBox4 = new javax.swing.JComboBox();
-        jComboBox5 = new javax.swing.JComboBox();
         percashier = new javax.swing.JComboBox();
-        jComboBox7 = new javax.swing.JComboBox();
-        jComboBox8 = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        jButton4 = new javax.swing.JButton();
 
         jLabel1.setText("jLabel1");
 
@@ -409,7 +493,7 @@ public class transaction extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTable16);
 
-        jLabel6.setBackground(new java.awt.Color(255, 255, 204));
+        jLabel6.setBackground(new java.awt.Color(255, 102, 102));
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Staff Transactions");
@@ -420,7 +504,7 @@ public class transaction extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setBackground(new java.awt.Color(255, 255, 204));
+        jLabel7.setBackground(new java.awt.Color(255, 102, 102));
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Cashier Transactions");
@@ -447,25 +531,9 @@ public class transaction extends javax.swing.JFrame {
         perstaff.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         perstaff.setMaximumRowCount(20);
 
-        jComboBox4.setBackground(new java.awt.Color(255, 204, 204));
-        jComboBox4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jComboBox4.setMaximumRowCount(20);
-
-        jComboBox5.setBackground(new java.awt.Color(255, 204, 204));
-        jComboBox5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jComboBox5.setMaximumRowCount(20);
-
         percashier.setBackground(new java.awt.Color(255, 204, 204));
         percashier.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         percashier.setMaximumRowCount(20);
-
-        jComboBox7.setBackground(new java.awt.Color(255, 204, 204));
-        jComboBox7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jComboBox7.setMaximumRowCount(20);
-
-        jComboBox8.setBackground(new java.awt.Color(255, 204, 204));
-        jComboBox8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jComboBox8.setMaximumRowCount(20);
 
         jButton1.setBackground(new java.awt.Color(255, 255, 153));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -487,42 +555,67 @@ public class transaction extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setBackground(new java.awt.Color(255, 255, 153));
+        jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 0, 51));
+        jButton3.setText("View");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jDateChooser1.setDateFormatString("yyyy/MM/dd");
+
+        jDateChooser2.setDateFormatString("yyyy/MM/dd");
+
+        jButton4.setBackground(new java.awt.Color(255, 255, 153));
+        jButton4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(255, 0, 0));
+        jButton4.setText("View");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jScrollPane2)
-                        .addGap(59, 59, 59))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 769, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4))
+                        .addGap(59, 59, 59)))
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jDateChooser2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                    .addComponent(perstaff, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(percashier, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(perstaff, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(percashier, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox7, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(70, 70, 70)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton2)
+                            .addComponent(jButton4)))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(61, 61, 61)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton1)
-                            .addComponent(jButton2)))
-                    .addComponent(jComboBox8, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(54, 54, 54))
+                            .addComponent(jButton3))))
+                .addGap(123, 123, 123))
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(348, 348, 348)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(341, 341, 341)
+                        .addContainerGap()
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -530,20 +623,20 @@ public class transaction extends javax.swing.JFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(63, 63, 63)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(perstaff, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(36, 36, 36)
-                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
-                        .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(31, 31, 31)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel6Layout.createSequentialGroup()
+                            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(perstaff, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(33, 33, 33)
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(57, 57, 57)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -551,23 +644,25 @@ public class transaction extends javax.swing.JFrame {
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(percashier, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30)
-                        .addComponent(jComboBox7, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
-                        .addComponent(jComboBox8, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(72, Short.MAX_VALUE))
+                        .addGap(23, 23, 23)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 1145, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 13, Short.MAX_VALUE))
         );
 
         pack();
@@ -645,6 +740,10 @@ public class transaction extends javax.swing.JFrame {
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
         // TODO add your handling code here:
+        
+          DefaultTableModel model = (DefaultTableModel)jTable16.getModel();
+          TableRowSorter<DefaultTableModel> tr= new TableRowSorter<DefaultTableModel>(model);
+          jTable16.setRowSorter(tr);
              DefaultTableModel df = (DefaultTableModel)jTable16.getModel();
              df.setRowCount(0);
 
@@ -685,7 +784,9 @@ public class transaction extends javax.swing.JFrame {
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         // TODO add your handling code here:
         
- 
+        DefaultTableModel model = (DefaultTableModel)jTable18.getModel();
+        TableRowSorter<DefaultTableModel> tr= new TableRowSorter<DefaultTableModel>(model);
+        jTable18.setRowSorter(tr);
          DefaultTableModel df = (DefaultTableModel)jTable18.getModel();
          df.setRowCount(0);
         try {
@@ -735,7 +836,9 @@ public class transaction extends javax.swing.JFrame {
         }else if(perstaff.getSelectedIndex() == 1) {
             staff1();
         }
-        
+        DefaultTableModel model = (DefaultTableModel)jTable16.getModel();
+        TableRowSorter<DefaultTableModel> tr= new TableRowSorter<DefaultTableModel>(model);
+        jTable16.setRowSorter(tr);
 
 
         
@@ -749,7 +852,54 @@ public class transaction extends javax.swing.JFrame {
         }else if(percashier.getSelectedIndex() == 1) {
             cashier1();
         }
+         
+        DefaultTableModel model = (DefaultTableModel)jTable18.getModel();
+        TableRowSorter<DefaultTableModel> tr= new TableRowSorter<DefaultTableModel>(model);
+        jTable18.setRowSorter(tr);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+//
+        try{
+//        jTable16.setModel(new DefaultTableModel(null, new Object[]{"id","InventoryID","quantity","type_transaction","UserID","date","time"}));
+        SimpleDateFormat dATE = new SimpleDateFormat("yyyy/MM/dd");
+        String date1 = dATE.format(jDateChooser1.getDate());
+ 
+//        showbydate(date1);
+        DefaultTableModel model = (DefaultTableModel)jTable16.getModel();
+        TableRowSorter<DefaultTableModel> tr= new TableRowSorter<DefaultTableModel>(model);
+        jTable16.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter(date1.trim()));
+//        
+        }catch (Exception e){
+       
+        } 
+       
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        
+         try{
+//        jTable16.setModel(new DefaultTableModel(null, new Object[]{"id","InventoryID","quantity","type_transaction","UserID","date","time"}));
+        SimpleDateFormat dATE = new SimpleDateFormat("yyyy/MM/dd");
+        String date1 = dATE.format(jDateChooser2.getDate());
+ 
+//        showbydate(date1);
+        DefaultTableModel model = (DefaultTableModel)jTable18.getModel();
+        TableRowSorter<DefaultTableModel> tr= new TableRowSorter<DefaultTableModel>(model);
+        jTable18.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter(date1.trim()));
+//        
+        }catch (Exception e){
+       
+        } 
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -790,10 +940,10 @@ public class transaction extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox jComboBox4;
-    private javax.swing.JComboBox jComboBox5;
-    private javax.swing.JComboBox jComboBox7;
-    private javax.swing.JComboBox jComboBox8;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;

@@ -859,7 +859,8 @@ public class inventorypage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jaddActionPerformed
-         
+//         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//         String date1 = sdf.format(JDATE.getDate());
         String date = jdate.getText();
         String qty = jquantity.getText();
         String timee = time.getText();

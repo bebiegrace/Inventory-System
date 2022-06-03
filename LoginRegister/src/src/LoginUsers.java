@@ -435,7 +435,11 @@ public class LoginUsers extends javax.swing.JFrame {
 //                String sql = "SELECT * FROM users";
 //                PreparedStatement pst = con.prepareStatement(sql);
                 Connection con = myc.getConn();
+                
+                  
+            
                 String sql = "SELECT * FROM users WHERE  username=? AND password=?";
+//                 String sql = "SELECT * FROM users as a join `user_applicant` as b on a.username=? AND a.password=? = b.username=? AND b.password=?";
                 PreparedStatement pst = con.prepareStatement(sql);
                 pst.setString(1, uname);
                 pst.setString(2, pass);
@@ -448,7 +452,7 @@ public class LoginUsers extends javax.swing.JFrame {
                 
                   if (rs.next()) {
                     if(rs.getString(8).equals("Inactive")){
-                        JOptionPane.showMessageDialog(null, "Please wait for admin approval");
+                        JOptionPane.showMessageDialog(null, "Your account is not active");
                     }else{
                         if (rs.getString(7).equals("Admin")) {
                             JOptionPane.showMessageDialog(null, "Hello " + uname + "!" + " Welcome to " + "Admin" + "  Management!!");
@@ -465,19 +469,19 @@ public class LoginUsers extends javax.swing.JFrame {
                              try {
             Statement st = con.createStatement();
             String query1 = "select * from `users`";
-            ResultSet rs1 = st.executeQuery(query1);
+            ResultSet rs2 = st.executeQuery(query1);
 
-            while(rs1.next()){
+            while(rs2.next()){
                 //data wil added until finished..
-                String Id1 = rs1.getString("id");
-                String username1 = rs1.getString("username");
-                String password1 = rs1.getString("password");
-                String email_id1 = rs1.getString("email_id");
-                String gender1 = rs1.getString("gender");
-                String age1 = rs1.getString("age");
-                String rolr = rs1.getString("role");
+                String Id1 = rs2.getString("id");
+                String username1 = rs2.getString("username");
+                String password1 = rs2.getString("password");
+                String email_id1 = rs2.getString("email_id");
+                String gender1 = rs2.getString("gender");
+                String age1 = rs2.getString("age");
+                String rolr = rs2.getString("role");
 
-                String status1= rs1.getString("status");
+                String status1= rs2.getString("status");
 
                 //string array for store data into jtable..
                 String tbData[] = {Id1,username1,password1,email_id1,gender1,age1,rolr,status1};
@@ -536,14 +540,28 @@ public class LoginUsers extends javax.swing.JFrame {
                     jclearActionPerformed(evt);
                     
                 }
-                
+                   
+                   String sql1 = "SELECT * FROM user_applicant WHERE  username=? AND password=?";
+//                 String sql = "SELECT * FROM users as a join `user_applicant` as b on a.username=? AND a.password=? = b.username=? AND b.password=?";
+                   PreparedStatement pst1 = con.prepareStatement(sql1);
+                   pst1.setString(1, uname);
+                  pst1.setString(2, pass);
+                   ResultSet rs1 = pst1.executeQuery();
+//                
+                  if (rs1.next()) {
+                    if(rs1.getString(8).equals("Inactive")){
+                        JOptionPane.showMessageDialog(null, "Please wait for admin's approval");
+                    }
+                  }
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null, "Database Exception Error!!" + e);
             } 
-                    
+            
+             
                 
                 
-                  //thereeeeeeeee
+     
+
 //               while(rs.next()) {
 //                               
 //
